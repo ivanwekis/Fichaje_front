@@ -11,9 +11,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './servicios/login.services';
 import { CookieService } from 'ngx-cookie-service';
+import { MainComponent } from './main/main.component';
+import { RegistroService } from './servicios/registro.services';
 
 const appRoutes:Routes = [
   {path:'login', component:LoginComponent},
+  {path:'logout', component:LoginComponent},
   {path:'signup', component:RegistroComponent},
 
 ]
@@ -23,7 +26,8 @@ const appRoutes:Routes = [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    RegistroComponent
+    RegistroComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,7 @@ const appRoutes:Routes = [
   providers: [
     provideClientHydration(),
     LoginService,
+    RegistroService,
     CookieService
   ],
   bootstrap: [AppComponent]

@@ -10,20 +10,22 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username: string = "Martiita99";
   password: string = "jcsuisiosdlks";
-  logueado: boolean;
 
   constructor(private loginService:LoginService, private router:Router) { 
-    this.logueado = this.loginService.isLogin();
+
   }
 
 
 
   login() {
+    this.loginService.login(this.username, this.password);
+    console.log("Login correcto");
+    this.router.navigate(['/']);
+    this.password = "";
+  }
 
-  this.loginService.login(this.username, this.password);
-  console.log("Login correcto");
-  this.router.navigate(['/']);
-  
-  this.password = "";
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(['/']);
   }
 }
