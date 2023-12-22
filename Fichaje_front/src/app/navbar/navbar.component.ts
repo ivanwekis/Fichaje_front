@@ -9,10 +9,13 @@ import { LoginService } from '../servicios/login.services';
 export class NavbarComponent {
     
     constructor(private loginService:LoginService) {
-       this.loginService.logout();
      }
 
     islogin() {
       return this.loginService.isLogin();
+    }
+
+    logout() {
+      this.loginService.logout();
     }
 }

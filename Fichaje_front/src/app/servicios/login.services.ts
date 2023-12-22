@@ -1,31 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
-import { waitForAsync } from '@angular/core/testing';
+import { User } from '../modelos/user.model';
+import { get } from 'http';
 
 @Injectable()
 export class LoginService {
     private apiUrl = 'http://localhost:8000';
     token:string;
-
-    constructor(private http: HttpClient, private cookie:CookieService) { }
+    user: User;
+    
+    constructor(private http: HttpClient, public cookie:CookieService) {
+      this.user = new User();
+      this.user.setUser(this.getUser());
+     }
 
     login(username: string, password: string) {
         const url = `${this.apiUrl}/login`;
-        this.http.post(url, { username:username, password:password }).subscribe(
-            (response: any) => {
-              // Manejar la respuesta exitosa aquí
-              console.log('Registrado correctamente:', response.access_token);
-              this.token = response.access_token;
-              this.cookie.set('token', this.token);
-            },
-            (error) => {
-              // Manejar errores aquí
-              console.error('Error en la petición:', error);
-            }
-          );
+        return this.http.post(url, { username:username, password:password })
       
     }
 
@@ -39,5 +31,15 @@ export class LoginService {
 
     isLogin() {
       return this.cookie.check('token');
+    }
+
+    getUser() {
+      return this.cookie.get('user');
+    }
+
+    getAuthHeaders() {
+      return {
+        'Authorization': `Bearer ${this.getToken()}`
+      }
     }
 }

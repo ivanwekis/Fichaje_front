@@ -13,11 +13,16 @@ import { LoginService } from './servicios/login.services';
 import { CookieService } from 'ngx-cookie-service';
 import { MainComponent } from './main/main.component';
 import { RegistroService } from './servicios/registro.services';
+import { RegisterTableComponent } from './main/components/register-table/register-table.component';
+import { FicharService } from './servicios/fichar.services';
+import { RegisterService } from './servicios/register.service';
 
 const appRoutes:Routes = [
   {path:'login', component:LoginComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full' },
   {path:'logout', component:LoginComponent},
   {path:'signup', component:RegistroComponent},
+  {path:'fichaje', component:MainComponent},
 
 ]
 
@@ -27,7 +32,8 @@ const appRoutes:Routes = [
     LoginComponent,
     NavbarComponent,
     RegistroComponent,
-    MainComponent
+    MainComponent,
+    RegisterTableComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,8 @@ const appRoutes:Routes = [
     provideClientHydration(),
     LoginService,
     RegistroService,
+    FicharService,
+    RegisterService,
     CookieService
   ],
   bootstrap: [AppComponent]

@@ -1,1 +1,57 @@
-<p>main works!</p>
+<style>
+    .container {
+        text-align: center;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sombreado {
+        box-shadow: 0 0 20px rgba(0, 0, 1, 1);
+    }
+
+    #ficharBtn {
+        background-color: #006db1e4;
+        color: #fff;
+        font-size: 25px;
+        padding: 20px 75px;
+        border: 2px solid #00000047;
+        border-radius: 50%;
+        transition: box-shadow 0.5s ease, background 0.5s ease;
+        cursor: pointer;
+    }
+
+    #horasList {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #horasList th, #horasList td {
+        border: 1px solid #666666;
+        padding: 10px;
+        text-align: center;
+    }
+
+    #horasList th {
+        background-color: #ff000045;
+        color: #fff;
+    }
+</style>
+
+<div class="container mt-3">
+    <div class="row justify-content-center">
+       
+            <div *ngIf="!checkState()">
+                <button id="ficharBtn"  (click)="fichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Fichar</button>
+            </div>
+            <div *ngIf="checkState()">
+                <button id="ficharBtn" (click)="desfichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Desfichar</button>
+            </div>
+            <div *ngIf="this.isLogin()">
+                <app-register-table id="horasList" [registers]="registers"></app-register-table>
+            </div>
+       
+    </div>
+</div>
