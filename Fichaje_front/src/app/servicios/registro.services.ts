@@ -12,6 +12,6 @@ export class RegistroService {
 
     registrarUsuario(newUser: NewUser) {
         const url = `${this.backendUrl}/v1/create_user`; // Cambia "/registro" por la ruta correcta en tu backend
-        return this.http.post(url, {username: newUser.user, password: newUser.password, email: newUser.email, company: newUser.company, name: newUser.name, surname: newUser.surname});
+        return this.http.post(url, {"username": newUser.user, "password": newUser.password, "email": newUser.email, "company": newUser.company, "name": newUser.name, "surname": newUser.surname});
     }
 }

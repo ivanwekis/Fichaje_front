@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username: string = "Martiita99";
-  password: string = "jcsuisiosdlks";
+  username: any = "ivanmoar";
+  password: any = "holahola";
 
   constructor(private loginService:LoginService, private router:Router) { 
 
@@ -28,8 +28,8 @@ export class LoginComponent {
         console.log('Registrado correctamente:', response.access_token);
         this.loginService.token = response.access_token;
         this.loginService.user.setUser(this.username);
-        this.loginService.cookie.set('token', this.loginService.token);
-        this.loginService.cookie.set('user', this.loginService.user.getUser());
+        this.loginService.cookie.set('token', this.loginService.token, 30);
+        this.loginService.cookie.set('user', this.loginService.user.getUser(), 30);
         this.router.navigate(['/fichaje']);
       },
       (error) => {
