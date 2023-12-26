@@ -28,7 +28,7 @@ export class RegisterService {
         const dateTimeHour = new Date();
         this.currentDay = dateTimeDay.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
         this.currentHour =  dateTimeHour.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'});
-        this.registers.unshift(new Register(this.currentDay, this.currentHour, "-"));
+        this.registers.unshift(new Register(this.currentDay,this.currentDay, this.currentHour, "-"));
     }
 
     updateRegister(){
@@ -40,7 +40,6 @@ export class RegisterService {
     todayHasRegister(){
         const dateTimeDay = new Date();
         this.currentDay = dateTimeDay.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
-        console.log(this.registers[0].date, this.currentDay);
         if(this.registers[0].date == this.currentDay){
             if(this.registers[0].finish == "-"){
                 return true;

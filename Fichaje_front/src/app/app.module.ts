@@ -16,12 +16,17 @@ import { RegistroService } from './servicios/registro.services';
 import { RegisterTableComponent } from './main/components/register-table/register-table.component';
 import { FicharService } from './servicios/fichar.services';
 import { RegisterService } from './servicios/register.service';
+import { PaginationComponent } from './main/components/pagination/pagination.component';
+import { ModifyRegisterComponent } from './main/components/modify-register/modify-register.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModifyRegister } from './servicios/modify.service';
 
 const appRoutes:Routes = [
   {path:'login', component:LoginComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full' },
   {path:'logout', component:LoginComponent},
   {path:'signup', component:RegistroComponent},
+  {path:'modify/:string', component:ModifyRegisterComponent},
   {path:'fichaje', component:MainComponent},
 
 ]
@@ -33,7 +38,9 @@ const appRoutes:Routes = [
     NavbarComponent,
     RegistroComponent,
     MainComponent,
-    RegisterTableComponent
+    RegisterTableComponent,
+    PaginationComponent,
+    ModifyRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,8 @@ const appRoutes:Routes = [
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ModalModule.forRoot(),
   ],
   providers: [
     provideClientHydration(),
@@ -49,7 +57,8 @@ const appRoutes:Routes = [
     RegistroService,
     FicharService,
     RegisterService,
-    CookieService
+    CookieService,
+    ModifyRegister,
   ],
   bootstrap: [AppComponent]
 })

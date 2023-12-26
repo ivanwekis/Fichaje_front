@@ -1,19 +1,24 @@
 
-<table id="horasList" class="table table-striped table-dark mt-3">
-    <thead>
-        <tr>
-            <th>Día</th>
-            <th>Inicio</th>
-            <th>Fin</th>
-        </tr>
-    </thead>
-    <tbody style="">
-        <!-- Aquí puedes agregar las filas de datos si es necesario -->
-        <tr *ngFor="let register of registers">
-            <td>{{register.date}}</td>
-            <td>{{register.start}}</td>
-            <td>{{register.finish}}</td>
-        </tr>
-        <!-- Puedes agregar más filas según sea necesario -->
-    </tbody>
-</table>
+<div class="row w-100">
+    <div class="col-md-3" *ngFor="let register of registers; ; let i = index">
+        <ng-container *ngIf="i<12">
+            <div class="card text-dark bg-light mb-1 mt-1 text-center">
+                <div class="card-header bg-light">
+                    <h5>Día: {{register.date}} </h5>
+                    
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Entrada: {{register.start}} Salida: {{register.finish}}</p>
+                    <button type="button" class="btn btn-outline-primary" *ngIf="!register.modified" (click)="showModal(i)">
+                        Modificar
+                    </button>
+                    <button type="button" class="btn btn-danger" *ngIf="register.modified" (click)="showModal(i)">
+                        Modificado
+                    </button>
+                </div>
+            </div>    
+        </ng-container>
+    </div>
+</div>
+
+```

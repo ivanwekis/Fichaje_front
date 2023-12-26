@@ -39,19 +39,22 @@
         color: #fff;
     }
 </style>
-
-<div class="container mt-3">
-    <div class="row justify-content-center">
-       
+<div class="container-xl mt-3">
+    <div class="row w-100">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <div *ngIf="!checkState()">
-                <button id="ficharBtn"  (click)="fichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Fichar</button>
+                <button class="btn btn-primary btn-block" (click)="fichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Fichar</button>
             </div>
             <div *ngIf="checkState()">
-                <button id="ficharBtn" (click)="desfichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Desfichar</button>
-            </div>
-            <div *ngIf="this.isLogin()">
-                <app-register-table id="horasList" [registers]="registers"></app-register-table>
-            </div>
-       
+                <button class="btn btn-primary btn-block" (click)="desfichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Desfichar</button>
+        </div>
+        </div>
+        <div class="col-md-3"></div>
     </div>
+</div>
+
+<div class="container-xl mt-3" *ngIf="this.isLogin()">
+    <app-register-table [registers]="registers"></app-register-table>
+    <app-pagination ></app-pagination>
 </div>

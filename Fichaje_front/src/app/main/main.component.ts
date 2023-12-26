@@ -18,10 +18,16 @@ export class MainComponent {
   ngOnInit(): void {
     this.registerService.getRegisters(this.loginService.user).subscribe(
       (data: any) => {
-          console.log('Registros obtenidos correctamente:', data['registers']);
+          console.log('Registros obtenidos correctamente:');
           for (let i = 0; i < data['registers'].length; i++) {
-              console.log(data['registers'][i]['date'], data['registers'][i]['start'], data['registers'][i]['finish']);
-              this.registerService.registers.push(new Register(data['registers'][i]['date'], data['registers'][i]['start'], data['registers'][i]['finish']));
+              
+              if(data['registers'][i]['modified'] == null){
+                data['registers'][i]['modified'] = false;
+              }
+              console.log(data['registers'][i]['modified']);
+              this.registerService.registers.push(new Register(data['registers'][i]['id'], data['registers'][i]['date'], 
+              data['registers'][i]['start'], data['registers'][i]['finish'], data['registers'][i]['modified']));
+              
               if(this.registerService.todayHasRegister()){
                 this.state = true;
               }
@@ -30,6 +36,7 @@ export class MainComponent {
               }
               this.registers = this.registerService.registers;
           }
+          //console.log(this.registers);
         },
           
   );
