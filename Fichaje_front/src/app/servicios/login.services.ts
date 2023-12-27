@@ -37,6 +37,10 @@ export class LoginService {
       return this.cookie.get('user');
     }
 
+    getName() {
+      return this.cookie.get('name');
+    }
+
     getAuthHeaders() {
       return {
         'Authorization': `Bearer ${this.getToken()}`

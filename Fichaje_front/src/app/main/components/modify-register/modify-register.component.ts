@@ -38,36 +38,41 @@ export class ModifyRegisterComponent {
   }
 
   save() {
+    
     this.register.start = this.format(this.start);
-    console.log(this.register.start);
+  
     if(this.finished == false){
       this.register.finish = "-";
     }
     else{
       this.register.finish = this.format(this.finish);
-      console.log(this.register.finish);
     }
-    
-    this.modifyService.modifyRegister(this.register).subscribe(
-      (response) => {
-        // Manejar la respuesta del servicio aquí
-        console.log(response);
-        this.register.modified = true;
-        this.close();
-        
-      },
-      (error) => {
-        // Manejar el error del servicio aquí
-        if(error.status == 404){
-          alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
+    if(this.start < this.finish){
+      console.log(this.start, this.finish);
+      this.modifyService.modifyRegister(this.register).subscribe(
+        (response) => {
+          // Manejar la respuesta del servicio aquí
+          console.log(response);
+          this.register.modified = true;
           this.close();
+          
+        },
+        (error) => {
+          // Manejar el error del servicio aquí
+          if(error.status == 404){
+            alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
+            this.close();
+          }
+          else{
+            alert("Ha ocurrido un error al modificar el registro.");
+            this.close();
+          }
         }
-        else{
-          alert("Ha ocurrido un error al modificar el registro.");
-          this.close();
-        }
-      }
-    );
+      );
+    }
+    else{
+      alert("La hora de entrada no puede ser mayor que la hora de salida.");
+    }
   }
 
   close() {
@@ -87,16 +92,7 @@ export class ModifyRegisterComponent {
       // Devolver un valor por defecto o lanzar una excepción según tus necesidades
       throw new Error('Formato de tiempo no válido');
     }
-  
-    // Manejar el caso especial cuando la cadena es "-"
-    if (time === "-") {
-      // Devolver la hora actual sin cambiar la fecha
-      const currentTime = new Date();
-      currentTime.setHours(22);
-      currentTime.setMinutes(0);
-      return new Date();
-    }
-  
+
     // Extraer horas y minutos de la cadena
     const [hours, minutes] = time.split(':');
   

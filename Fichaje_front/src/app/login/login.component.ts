@@ -30,6 +30,7 @@ export class LoginComponent {
         this.loginService.user.setUser(this.username);
         this.loginService.cookie.set('token', this.loginService.token, 30);
         this.loginService.cookie.set('user', this.loginService.user.getUser(), 30);
+        this.loginService.cookie.set('name', response.name, 30);
         this.router.navigate(['/fichaje']);
       },
       (error) => {

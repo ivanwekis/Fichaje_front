@@ -20,6 +20,7 @@ import { PaginationComponent } from './main/components/pagination/pagination.com
 import { ModifyRegisterComponent } from './main/components/modify-register/modify-register.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModifyRegister } from './servicios/modify.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes:Routes = [
   {path:'login', component:LoginComponent},
@@ -28,6 +29,8 @@ const appRoutes:Routes = [
   {path:'signup', component:RegistroComponent},
   {path:'modify/:string', component:ModifyRegisterComponent},
   {path:'fichaje', component:MainComponent},
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: '/not-found' },
 
 ]
 
@@ -41,6 +44,7 @@ const appRoutes:Routes = [
     RegisterTableComponent,
     PaginationComponent,
     ModifyRegisterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

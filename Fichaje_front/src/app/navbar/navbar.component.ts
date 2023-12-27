@@ -9,7 +9,11 @@ import { LoginService } from '../servicios/login.services';
 export class NavbarComponent {
     
     constructor(private loginService:LoginService) {
+      this.name = this.loginService.getName();
+      this.current_date = this.getDay();
      }
+    name: string;
+    current_date: string;
 
     islogin() {
       return this.loginService.isLogin();
@@ -18,4 +22,18 @@ export class NavbarComponent {
     logout() {
       this.loginService.logout();
     }
+
+    getDay = (): string => {
+      const diasDeLaSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    
+      const fechaActual = new Date();
+      const diaDeLaSemana = diasDeLaSemana[fechaActual.getDay()];
+      const diaDelMes = fechaActual.getDate();
+      const mes = fechaActual.getMonth() + 1; 
+      const año = fechaActual.getFullYear();
+    
+      const fechaFormateada = `${diaDeLaSemana}, ${diaDelMes}/${mes}/${año}`;
+    
+      return fechaFormateada;
+    };
 }

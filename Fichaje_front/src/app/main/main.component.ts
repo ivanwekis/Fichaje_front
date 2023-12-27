@@ -16,7 +16,7 @@ export class MainComponent {
   constructor(private ficharService:FicharService, private loginService:LoginService, private registerService:RegisterService) { }
   
   ngOnInit(): void {
-    this.registerService.getRegisters(this.loginService.user).subscribe(
+    this.registerService.getRegisters(1, this.loginService.user).subscribe(
       (data: any) => {
           console.log('Registros obtenidos correctamente:');
           for (let i = 0; i < data['registers'].length; i++) {

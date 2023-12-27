@@ -16,10 +16,10 @@ export class RegisterService {
         this.registers = [];
     }
 
-    getRegisters(user: User) {
+    getRegisters(page: number , user: User) {
         // Aquí puedes realizar la lógica para fichar, por ejemplo, enviar una solicitud POST al servidor
         
-        return this.http.post(`${this.apiUrl}/v2/getregisters`, {username: user.user}, {headers: this.loginService.getAuthHeaders()});
+        return this.http.post(`${this.apiUrl}/v2/getregisters/${page}`, {username: user.user}, {headers: this.loginService.getAuthHeaders()});
         
     }
 
@@ -48,4 +48,5 @@ export class RegisterService {
         }
         return false;
     }
+
 }
