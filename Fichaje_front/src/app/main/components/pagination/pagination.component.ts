@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RegisterService } from '../../../servicios/register.service';
-import { LoginService } from '../../../servicios/login.services';
+import { RegisterService } from '../../../services/register.service';
+import { LoginService } from '../../../services/login.services';
 import { Register } from '../../../modelos/register.model';
 
 @Component({
@@ -26,9 +26,7 @@ export class PaginationComponent {
             if(data['registers'][i]['modified'] == null){
               data['registers'][i]['modified'] = false;
             }
-            console.log(data['registers'][i]['modified']);
             
-            console.log(this.registerService.registers);
             this.registerService.registers.push(new Register(data['registers'][i]['id'], data['registers'][i]['date'], 
             data['registers'][i]['start'], data['registers'][i]['finish'], data['registers'][i]['modified']));
         }

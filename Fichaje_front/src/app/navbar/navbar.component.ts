@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../servicios/login.services';
+import { LoginService } from '../services/login.services';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NavbarModifyUserConfigComponent } from './components/navbar-modify-user-config/navbar-modify-user-config.component';
 
 @Component({
   selector: 'app-navbar',
@@ -8,12 +10,13 @@ import { LoginService } from '../servicios/login.services';
 })
 export class NavbarComponent {
     
-    constructor(private loginService:LoginService) {
+    constructor(private loginService:LoginService, private modalService: BsModalService) {
       this.name = this.loginService.getName();
       this.current_date = this.getDay();
      }
     name: string;
     current_date: string;
+    bsModalRef: BsModalRef;
 
     islogin() {
       return this.loginService.isLogin();
@@ -36,4 +39,16 @@ export class NavbarComponent {
     
       return fechaFormateada;
     };
+
+    userConfig() {
+      //this.loginService.userConfig();
+      this.showUserModal();
+    }
+
+    showUserModal() {
+      const initialState = {
+      };
+
+      this.bsModalRef = this.modalService.show(NavbarModifyUserConfigComponent, { initialState });
+  }
 }

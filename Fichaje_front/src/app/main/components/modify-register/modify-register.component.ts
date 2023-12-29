@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Register } from '../../../modelos/register.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ModifyRegister } from '../../../servicios/modify.service';
+import { ModifyRegister } from '../../../services/modify.service';
 
 
 
@@ -48,11 +48,10 @@ export class ModifyRegisterComponent {
       this.register.finish = this.format(this.finish);
     }
     if(this.start < this.finish){
-      console.log(this.start, this.finish);
+
       this.modifyService.modifyRegister(this.register).subscribe(
         (response) => {
           // Manejar la respuesta del servicio aquí
-          console.log(response);
           this.register.modified = true;
           this.close();
           

@@ -1,24 +1,30 @@
 
-<div class="row w-100">
-    <div class="col-md-3" *ngFor="let register of registers; ; let i = index">
+<style>
+    .card {
+        background-color: #ffffffd2;
+        border-radius: 6px;
+        box-shadow: 5px 5px 20px #0d0e2383; 
+    }
+</style>
+
+<div class="row mt-3">
+    <div class="col-md-3" *ngFor="let register of registers; let i = index">
         <ng-container *ngIf="i<12">
-            <div class="card text-dark bg-light mb-1 mt-1 text-center">
-                <div class="card-header bg-light">
-                    <h5>Día: {{register.date}} </h5>
-                    
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Entrada: {{register.start}} Salida: {{register.finish}}</p>
-                    <button type="button" class="btn btn-outline-primary" *ngIf="!register.modified" (click)="showModal(i)">
-                        Modificar
-                    </button>
-                    <button type="button" class="btn btn-danger" *ngIf="register.modified" (click)="showModal(i)">
-                        Modificado
-                    </button>
-                </div>
-            </div>    
+        <div class="card text-dark bg-light mb-1 mt-2 text-center">
+            <div class="card-header bg-light">
+            <h5>Día: {{register.date}} </h5>
+            </div>
+            <div class="card-body">
+            <p class="card-text">Entrada: {{register.start}} Salida: {{register.finish}}</p>
+            <button type="button" class="btn btn-outline-primary" *ngIf="!register.modified" (click)="showModal(i)">
+                Modificar
+            </button>
+            <button type="button" class="btn btn-danger" *ngIf="register.modified" (click)="showModal(i)">
+                Modificado
+            </button>
+            </div>
+        </div>
         </ng-container>
-    </div>
+    </div>  
 </div>
 
-```

@@ -6,21 +6,28 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistroComponent } from './registro/registro.component';
+import { RegistroComponent } from './core/signup/registro.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginService } from './servicios/login.services';
+import { LoginService } from './services/login.services';
 import { CookieService } from 'ngx-cookie-service';
 import { MainComponent } from './main/main.component';
-import { RegistroService } from './servicios/registro.services';
+import { RegistroService } from './services/registro.services';
 import { RegisterTableComponent } from './main/components/register-table/register-table.component';
-import { FicharService } from './servicios/fichar.services';
-import { RegisterService } from './servicios/register.service';
+import { FicharService } from './services/fichar.services';
+import { RegisterService } from './services/register.service';
 import { PaginationComponent } from './main/components/pagination/pagination.component';
 import { ModifyRegisterComponent } from './main/components/modify-register/modify-register.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ModifyRegister } from './servicios/modify.service';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModifyRegister } from './services/modify.service';
+import { NotFoundComponent } from './core/not-found/not-found.component';
+import { NavbarModifyUserConfigComponent } from './navbar/components/navbar-modify-user-config/navbar-modify-user-config.component';
+import { UserInfoService } from './services/userInfo.service';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { DropdownReasonComponent } from './main/components/dropdown-reason/dropdown-reason.component';
+import { MainButtonComponent } from './main/components/main-button/main-button.component';
+
 
 const appRoutes:Routes = [
   {path:'login', component:LoginComponent},
@@ -45,6 +52,9 @@ const appRoutes:Routes = [
     PaginationComponent,
     ModifyRegisterComponent,
     NotFoundComponent,
+    NavbarModifyUserConfigComponent,
+    DropdownReasonComponent,
+    MainButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +64,7 @@ const appRoutes:Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     ModalModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [
     provideClientHydration(),
@@ -63,6 +74,8 @@ const appRoutes:Routes = [
     RegisterService,
     CookieService,
     ModifyRegister,
+    UserInfoService,
+    provideAnimations(),
   ],
   bootstrap: [AppComponent]
 })

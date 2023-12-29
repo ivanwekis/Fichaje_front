@@ -17,7 +17,7 @@ export class FicharService {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.loginService.getToken()}`
           });
-          console.log(user.user);
+
         return this.http.post(`${this.apiUrl}/v0/fichar`, {username: user.user}, {headers, withCredentials: true});
     }
 

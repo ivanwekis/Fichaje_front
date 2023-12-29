@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../servicios/login.services';
+import { LoginService } from '../services/login.services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   username: any = "ivanmoar";
-  password: any = "holahola";
+  password: any = "holahola1@";
 
   constructor(private loginService:LoginService, private router:Router) { 
 
@@ -25,7 +25,6 @@ export class LoginComponent {
     this.loginService.login(this.username, this.password).subscribe(
       (response: any) => {
         // Manejar la respuesta exitosa aquí
-        console.log('Registrado correctamente:', response.access_token);
         this.loginService.token = response.access_token;
         this.loginService.user.setUser(this.username);
         this.loginService.cookie.set('token', this.loginService.token, 30);

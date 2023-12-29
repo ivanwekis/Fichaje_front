@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RegistroService } from '../servicios/registro.services';
-import { NewUser } from '../modelos/newuser.model';
+import { RegistroService } from '../../services/registro.services';
+import { NewUser } from '../../modelos/newuser.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +23,6 @@ export class RegistroComponent {
       if(this.checkParams(this.username, this.password, this.repassword, this.email, this.company, this.name, this.surname)){
         this.registerService.registrarUsuario(new NewUser(this.name, this.surname, this.username, this.email, this.password, this.company)).subscribe(
           (response:any) => {
-            console.log('Registrado correctamente:', response);
             this.router.navigate(['/login']);
           },
           (error) => {

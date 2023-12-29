@@ -1,60 +1,28 @@
 <style>
     .container {
-        text-align: center;
-        margin-top: 50px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .sombreado {
-        box-shadow: 0 0 20px rgba(0, 0, 1, 1);
-    }
-
-    #ficharBtn {
-        background-color: #006db1e4;
-        color: #fff;
-        font-size: 25px;
-        padding: 20px 75px;
-        border: 2px solid #00000047;
-        border-radius: 50%;
-        transition: box-shadow 0.5s ease, background 0.5s ease;
-        cursor: pointer;
-    }
-
-    #horasList {
-        margin-top: 20px;
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    #horasList th, #horasList td {
-        border: 1px solid #666666;
-        padding: 10px;
-        text-align: center;
-    }
-
-    #horasList th {
-        background-color: #ff000045;
-        color: #fff;
+        background-color: #ffffff51;
+        padding: 40px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 20px; 
+        border-bottom-right-radius: 20px;
+        box-shadow: 10px 0px 80px rgba(0, 0, 0, 0.588); 
     }
 </style>
-<div class="container-xl mt-3">
+
+<div class="container" *ngIf="this.isLogin()">
     <div class="row w-100">
         <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div *ngIf="!checkState()">
-                <button class="btn btn-primary btn-block" (click)="fichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Fichar</button>
-            </div>
-            <div *ngIf="checkState()">
-                <button class="btn btn-primary btn-block" (click)="desfichar()" (mouseover)="mostrarSombra = true" (mouseout)="mostrarSombra = false" [ngClass]="{'sombreado': mostrarSombra}">Desfichar</button>
+        <div class="col-md-6 ">
+            <app-main-button [state]="state"></app-main-button>
         </div>
+        <div class="col-md-3">
+            <app-dropdown-reason></app-dropdown-reason>
         </div>
-        <div class="col-md-3"></div>
+            <app-register-table [registers]="registers"></app-register-table>
+    
+        <div class="mt-1">
+            <app-pagination ></app-pagination>
+        </div>
     </div>
-</div>
-
-<div class="container-xl mt-3" *ngIf="this.isLogin()">
-    <app-register-table [registers]="registers"></app-register-table>
-    <app-pagination ></app-pagination>
 </div>

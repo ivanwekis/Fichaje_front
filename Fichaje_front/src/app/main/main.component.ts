@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FicharService } from '../servicios/fichar.services';
-import { LoginService } from '../servicios/login.services';
-import { RegisterService } from '../servicios/register.service';
+import { FicharService } from '../services/fichar.services';
+import { LoginService } from '../services/login.services';
+import { RegisterService } from '../services/register.service';
 import { Register } from '../modelos/register.model';
+
 
 @Component({
   selector: 'app-main',
@@ -11,20 +12,19 @@ import { Register } from '../modelos/register.model';
 })
 export class MainComponent {
   state: boolean;
-  mostrarSombra: boolean = false;
   registers: Register[];
   constructor(private ficharService:FicharService, private loginService:LoginService, private registerService:RegisterService) { }
   
   ngOnInit(): void {
     this.registerService.getRegisters(1, this.loginService.user).subscribe(
       (data: any) => {
-          console.log('Registros obtenidos correctamente:');
+          console.log('Registros obtenidos correctamente.');
           for (let i = 0; i < data['registers'].length; i++) {
               
               if(data['registers'][i]['modified'] == null){
                 data['registers'][i]['modified'] = false;
               }
-              console.log(data['registers'][i]['modified']);
+
               this.registerService.registers.push(new Register(data['registers'][i]['id'], data['registers'][i]['date'], 
               data['registers'][i]['start'], data['registers'][i]['finish'], data['registers'][i]['modified']));
               
@@ -36,46 +36,12 @@ export class MainComponent {
               }
               this.registers = this.registerService.registers;
           }
-          //console.log(this.registers);
+
         },
           
   );
     
     
-  }
-
-  fichar() {
-    this.ficharService.fichar(this.loginService.user).subscribe(
-      (response: any) => {
-        // Manejar la respuesta exitosa aquí
-        console.log('Ha fichado correctamente:', response);
-        this.registerService.newRegister();
-        this.state = true;
-
-      },
-      (error) => {
-        // Manejar errores aquí
-        console.error('Error en la petición:', error);
-        if(error.status == 400){
-          alert("Ya has fichado hoy");
-        }
-      }
-    );
-  }
-
-  desfichar() {
-    this.ficharService.desfichar(this.loginService.user).subscribe(
-      (response: any) => {
-        // Manejar la respuesta exitosa aquí
-        console.log('Ha desfichado correctamente:', response);
-        this.registerService.updateRegister();
-        this.state = false;
-      },
-      (error) => {
-        // Manejar errores aquí
-        console.error('Error en la petición:', error);
-      }
-    );
   }
 
   checkState() {
@@ -85,5 +51,12 @@ export class MainComponent {
 
   isLogin() {
     return this.loginService.isLogin();
+  }
+
+  gradientBackground() {
+    const startColor = this.isLogin() ? '#9d9d9d' : '#343a40'; // Color de inicio para login y no login
+    const endColor = this.isLogin() ? '#343a40' : '#9d9d9d'; // Color de fin para login y no login
+  
+    return `linear-gradient(to right bottom, ${startColor}, ${endColor})`;
   }
 }
