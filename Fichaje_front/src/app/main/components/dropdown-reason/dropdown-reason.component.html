@@ -5,9 +5,7 @@
     </button>
     <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
         role="menu" aria-labelledby="button-basic">
-      <li role="menuitem"><a class="dropdown-item" href="#">-</a></li>
-      <li role="menuitem"><a class="dropdown-item" href="#">Cita médica</a></li>
-      <li role="menuitem"><a class="dropdown-item" href="#">Trámites administrativos</a></li>
+      <li role="menuitem" *ngFor="let r of reasons"><a class="dropdown-item" (click)="reasonChoosen(r)">{{ r }}</a></li>
       <li class="divider dropdown-divider"></li>
       <li role="menuitem"><a class="dropdown-item" href="#">Otros</a>
       </li>

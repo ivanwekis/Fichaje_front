@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Register } from '../../../modelos/register.model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component } from '@angular/core';
+import { Register } from '../../../models/register.model';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModifyRegister } from '../../../services/modify.service';
 
 

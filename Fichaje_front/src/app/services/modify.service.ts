@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../modelos/user.model';
+import { User } from '../models/user.model';
 import { LoginService } from './login.services';
-import { Register } from '../modelos/register.model';
+import { Register } from '../models/register.model';
 
 @Injectable()
 export class ModifyRegister {

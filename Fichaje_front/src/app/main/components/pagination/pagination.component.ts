@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RegisterService } from '../../../services/register.service';
 import { LoginService } from '../../../services/login.services';
-import { Register } from '../../../modelos/register.model';
+import { Register } from '../../../models/register.model';
 
 @Component({
   selector: 'app-pagination',

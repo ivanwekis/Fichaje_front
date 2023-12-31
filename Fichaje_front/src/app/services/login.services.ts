@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { User } from '../modelos/user.model';
+import { User } from '../models/user.model';
 import { get } from 'http';
 
 @Injectable()

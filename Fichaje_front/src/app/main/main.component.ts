@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { FicharService } from '../services/fichar.services';
 import { LoginService } from '../services/login.services';
 import { RegisterService } from '../services/register.service';
-import { Register } from '../modelos/register.model';
+import { Register } from '../models/register.model';
 
 
 @Component({
@@ -13,7 +12,9 @@ import { Register } from '../modelos/register.model';
 export class MainComponent {
   state: boolean;
   registers: Register[];
-  constructor(private ficharService:FicharService, private loginService:LoginService, private registerService:RegisterService) { }
+  nightShift: boolean = false;
+  reason: string="-";
+  constructor(private loginService:LoginService, private registerService:RegisterService) { }
   
   ngOnInit(): void {
     this.registerService.getRegisters(1, this.loginService.user).subscribe(
@@ -37,11 +38,18 @@ export class MainComponent {
               this.registers = this.registerService.registers;
           }
 
-        },
-          
+        },      
   );
-    
-    
+  const currentTime = new Date();
+  currentTime.getHours() >= 20 || currentTime.getHours() <= 4 ? this.nightShift = true : this.nightShift = false;
+  }
+  
+  stateChanger(state: boolean) {
+    this.state = state;
+  }
+
+  reasonChoosen(reason: string) {
+    this.reason = reason;
   }
 
   checkState() {

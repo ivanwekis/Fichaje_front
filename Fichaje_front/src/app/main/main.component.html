@@ -14,15 +14,16 @@
     <div class="row w-100">
         <div class="col-md-3"></div>
         <div class="col-md-6 ">
-            <app-main-button [state]="state"></app-main-button>
+            <app-main-button [reason]="reason" [nightShift]="nightShift" (stateChange)="stateChanger($event)"></app-main-button>
         </div>
         <div class="col-md-3">
-            <app-dropdown-reason></app-dropdown-reason>
+            <app-night-shift (nightShift)="nightShift" *ngIf="!this.checkState()"></app-night-shift>
+            <app-dropdown-reason (reasonChange)="reasonChoosen($event)" *ngIf="this.checkState()"></app-dropdown-reason>
         </div>
             <app-register-table [registers]="registers"></app-register-table>
     
         <div class="mt-1">
-            <app-pagination ></app-pagination>
+            <app-pagination></app-pagination>
         </div>
     </div>
 </div>

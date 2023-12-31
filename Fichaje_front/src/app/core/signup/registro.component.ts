@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RegistroService } from '../../services/registro.services';
-import { NewUser } from '../../modelos/newuser.model';
+import { NewUser } from '../../models/newuser.model';
 import { Router } from '@angular/router';
 
 @Component({

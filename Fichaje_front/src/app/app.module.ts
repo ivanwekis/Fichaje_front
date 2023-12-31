@@ -27,6 +27,7 @@ import { UserInfoService } from './services/userInfo.service';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { DropdownReasonComponent } from './main/components/dropdown-reason/dropdown-reason.component';
 import { MainButtonComponent } from './main/components/main-button/main-button.component';
+import { NightShiftComponent } from './main/components/night-shift/night-shift.component';
 
 
 const appRoutes:Routes = [
@@ -55,6 +56,7 @@ const appRoutes:Routes = [
     NavbarModifyUserConfigComponent,
     DropdownReasonComponent,
     MainButtonComponent,
+    NightShiftComponent,
   ],
   imports: [
     BrowserModule,

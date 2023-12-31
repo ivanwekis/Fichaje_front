@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { Register } from '../../../modelos/register.model';
+import { Register } from '../../../models/register.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModifyRegisterComponent } from '../modify-register/modify-register.component';
 
