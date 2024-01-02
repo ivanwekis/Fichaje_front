@@ -1,0 +1,13 @@
+<style>
+    .modified {
+        background-color: #ff3d3d;
+        border-radius: 8px;
+        padding-left:5px; 
+        padding-right:5px; 
+    }
+</style>
+<div class="card-header">
+    <div  (click)="showModal()" [ngStyle]="{'cursor': isClickable ? 'pointer' : 'default'}" (mouseover)="isClickable = true"  (mouseout)="isClickable = false" tooltip="Modificar"  [delay]="500" placement="top">
+        <h5 [ngClass]="{'modified': register.modified}">Día: {{register.date}} </h5>
+    </div>
+</div>

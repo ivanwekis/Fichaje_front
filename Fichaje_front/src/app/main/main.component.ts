@@ -25,8 +25,7 @@ export class MainComponent {
               if(data['registers'][i]['modified'] == null){
                 data['registers'][i]['modified'] = false;
               }
-
-              this.registerService.registers.push(new Register(data['registers'][i]['id'], data['registers'][i]['date'], 
+              this.registerService.registers.push(new Register(data['registers'][i]['string_id'], data['registers'][i]['date'], 
               data['registers'][i]['start'], data['registers'][i]['finish'], data['registers'][i]['modified']));
               
               if(this.registerService.todayHasRegister()){

@@ -17,17 +17,22 @@ import { RegisterTableComponent } from './main/components/register-table/registe
 import { FicharService } from './services/fichar.services';
 import { RegisterService } from './services/register.service';
 import { PaginationComponent } from './main/components/pagination/pagination.component';
-import { ModifyRegisterComponent } from './main/components/modify-register/modify-register.component';
+import { ModifyRegisterComponent } from './main/components/register-card/modify-register/modify-register.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModifyRegister } from './services/modify.service';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { NavbarModifyUserConfigComponent } from './navbar/components/navbar-modify-user-config/navbar-modify-user-config.component';
 import { UserInfoService } from './services/userInfo.service';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { DropdownReasonComponent } from './main/components/dropdown-reason/dropdown-reason.component';
 import { MainButtonComponent } from './main/components/main-button/main-button.component';
 import { NightShiftComponent } from './main/components/night-shift/night-shift.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { RegisterCardComponent } from './main/components/register-card/register-card.component';
+import { CardHeaderComponent } from './main/components/register-card/card-header/card-header.component';
+import { CardBodyComponent } from './main/components/register-card/card-body/card-body.component';
+import { ShowInfoComponent } from './main/components/register-card/show-info/show-info.component'; 
 
 
 const appRoutes:Routes = [
@@ -57,6 +62,10 @@ const appRoutes:Routes = [
     DropdownReasonComponent,
     MainButtonComponent,
     NightShiftComponent,
+    RegisterCardComponent,
+    CardHeaderComponent,
+    CardBodyComponent,
+    ShowInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +75,9 @@ const appRoutes:Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     ModalModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [
     provideClientHydration(),

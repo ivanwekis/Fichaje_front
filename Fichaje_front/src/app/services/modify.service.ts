@@ -17,7 +17,7 @@ export class ModifyRegister {
 
     modifyRegister(register:Register) {
         const url = `${this.apiUrl}/v2/modifyRegister`;
-        return this.http.put(url, { "id":register.id, "date":register.date, "start": register.start, "finish":register.finish }, 
+        return this.http.put(url, { "string_id":register.string_id, "date":register.date, "start": register.start, "finish":register.finish }, 
         { headers: this.loginService.getAuthHeaders()});
       
     }

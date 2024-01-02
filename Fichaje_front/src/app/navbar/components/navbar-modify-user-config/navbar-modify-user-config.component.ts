@@ -22,7 +22,6 @@ export class NavbarModifyUserConfigComponent {
   }
   ngOnInit() {
     this.userInfoService.getUserInfo().subscribe((data: any) => {
-      console.log(data);
       this.userInfo.username = data['username'];
       this.userInfo.company = data['company'];
       this.userInfo.email = data['email'];
@@ -38,7 +37,6 @@ export class NavbarModifyUserConfigComponent {
         this.modifyUser = new ModifyUser(this.userInfo.name, this.userInfo.surname, this.userInfo.username, 
           this.userInfo.email, this.newpassword, this.userInfo.company);
         this.userInfoService.modifyUserInfo(this.modifyUser).subscribe((data: any) => {
-          console.log(data);
           alert("Usuario modificado correctamente");
           this.bsModalRef.hide();
         });

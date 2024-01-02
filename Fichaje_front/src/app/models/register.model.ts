@@ -2,14 +2,14 @@ export class Register {
     date: string;
     start: string;
     finish: string;
-    id: string;
+    string_id: string;
     modified: boolean;
 
-    constructor(id:string, date: string, start: string, finish: string, modified: boolean=false) {
+    constructor(string_id:string, date: string, start: string, finish: string, modified: boolean=false) {
         this.date = date;
         this.start = start;
         this.finish = finish;
-        this.id = id;
+        this.string_id = string_id;
         this.modified = modified;
     }
 }

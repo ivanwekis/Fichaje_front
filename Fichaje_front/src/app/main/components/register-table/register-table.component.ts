@@ -1,7 +1,7 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { Register } from '../../../models/register.model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ModifyRegisterComponent } from '../modify-register/modify-register.component';
+import { BsModalRef} from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-register-table',
@@ -12,22 +12,14 @@ export class RegisterTableComponent {
 
   @Input() registers: Register[];
   bsModalRef: BsModalRef;
-  modified: string ;
-  constructor(private modalService: BsModalService) { 
+  isClickable: boolean = false;
+
+  constructor() { 
     
   }
 
   ngOnInit(): void {
-
   }
 
-   // Método para mostrar el modal
-   showModal(index: number) {
-      const initialState = {
-        register: this.registers[index]
-      };
-
-      this.bsModalRef = this.modalService.show(ModifyRegisterComponent, { initialState });
-  }
 
 }

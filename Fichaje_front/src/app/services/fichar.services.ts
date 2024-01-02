@@ -16,7 +16,6 @@ export class FicharService {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.loginService.getToken()}`
           });
-        console.log("nightShift");
         return this.http.post(`${this.apiUrl}/v0/fichar`, {"nightShift": nightShift}, {headers, withCredentials: true});
     }
 

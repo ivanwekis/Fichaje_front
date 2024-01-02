@@ -18,7 +18,6 @@ export class MainButtonComponent {
 
 
   fichar() {
-    console.log("nightShift");
     this.ficharService.fichar(this.nightShift).subscribe(
       (response: any) => {
         // Manejar la respuesta exitosa aquí

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Register } from '../../../models/register.model';
+import { Register } from '../../../../models/register.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ModifyRegister } from '../../../services/modify.service';
+import { ModifyRegister } from '../../../../services/modify.service';
 
 
 
@@ -22,7 +22,14 @@ export class ModifyRegisterComponent {
   
   ngOnInit(): void {
     if(this.register.finish == "-"){
-      this.finished = false;
+      if(this.isToday(this.register.date)){
+        this.finished = false;
+      }
+      else{
+        this.finished = true;
+        this.finish = new Date();
+      }
+      
     }
     else{
       this.finished = true;
@@ -50,13 +57,11 @@ export class ModifyRegisterComponent {
 
       this.modifyService.modifyRegister(this.register).subscribe(
         (response) => {
-          // Manejar la respuesta del servicio aquí
           this.register.modified = true;
           this.close();
           
         },
         (error) => {
-          // Manejar el error del servicio aquí
           if(error.status == 404){
             alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
             this.close();
@@ -85,16 +90,11 @@ export class ModifyRegisterComponent {
   }
   
   private fromStringToDate(time: string): Date {
-    // Validar que la cadena sea válida
     if (!time || typeof time !== 'string' || !/^\d{2}:\d{2}$/.test(time)) {
-      // Devolver un valor por defecto o lanzar una excepción según tus necesidades
       throw new Error('Formato de tiempo no válido');
     }
-
-    // Extraer horas y minutos de la cadena
     const [hours, minutes] = time.split(':');
-  
-    // Crear un nuevo objeto Date y establecer la hora
+
     const currentTime = new Date();
     currentTime.setHours(Number(hours)+1);
     currentTime.setMinutes(Number(minutes));
@@ -104,9 +104,18 @@ export class ModifyRegisterComponent {
   
 
   format(date: Date): string {
-    // Función para formatear la hora y minutos en formato "HH:mm"
     return date.toISOString().slice(11, 16);
   }
 
-
+  isToday(dateString: string): boolean {
+    const currentDate = new Date();
+    const [day, month, year] = dateString.split('/').map(Number);
+    const dateGet = new Date(year, month - 1, day);
+  
+    return (
+      currentDate.getDate() === dateGet.getDate() &&
+      currentDate.getMonth() === dateGet.getMonth() &&
+      currentDate.getFullYear() === dateGet.getFullYear()
+    );
+  }
 }

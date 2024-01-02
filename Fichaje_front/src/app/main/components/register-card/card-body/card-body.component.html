@@ -1,0 +1,14 @@
+
+<style>
+    .modified {
+        background-color: #ff3d3d;
+        border-radius: 8px;
+        padding-left:5px; 
+        padding-right:5px; 
+    }
+</style>
+
+<div class="card-body" (click)="showModal()" [ngStyle]="{'cursor': isClickable ? 'pointer' : 'default'}" (mouseover)="isClickable = true"  (mouseout)="isClickable = false" tooltip="Mas información"  [delay]="1000" placement="bottom">
+    <p class="card-text">Entrada: {{register.start}}</p>
+    <p class="card-text">Salida: {{register.finish}}</p>
+</div>
