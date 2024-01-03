@@ -6,14 +6,16 @@
       <div class="modal-body">
         <p>Día: {{register.date}}</p>
         <form>
+          <ng-container *ngFor="let input of register.inputs; let i = index">
             <div class="form-group">
-                <label for="start">Entrada</label>
-                <input type="time" class="form-control" id="start" name="start" [ngModel]="format(start)" (ngModelChange)="updateStart($event)">
-            </div>
-            <div class="form-group" *ngIf="finished">
-                <label for="finish">Salida</label> 
-                <input type="time" class="form-control" id="finish" name="finish" [ngModel]="format(finish)" (ngModelChange)="updateFinish($event)">
-            </div>
+              <label for="start">Entrada {{ i + 1 }}</label>
+              <input type="time" class="form-control" id="start" name="start" [ngModel]="format(input_list[i])" (ngModelChange)="updateInput($event,i)">
+          </div>
+          <div class="form-group" *ngIf="finished[i]">
+              <label for="finish">Salida {{ i + 1 }}</label> 
+              <input type="time" class="form-control" id="finish" name="finish" [ngModel]="format(output_list[i])" (ngModelChange)="updateOutput($event,i)">
+          </div>
+          </ng-container>
         </form>
         <!-- Puedes agregar más contenido si es necesario -->
       </div>

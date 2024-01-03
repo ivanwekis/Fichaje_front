@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { LoginService } from '../services/login.services';
 import { RegisterService } from '../services/register.service';
-import { Register } from '../models/register.model';
+import { Register, Output, Input} from '../models/register.model';
 
 
 @Component({
@@ -25,18 +25,18 @@ export class MainComponent {
               if(data['registers'][i]['modified'] == null){
                 data['registers'][i]['modified'] = false;
               }
-              this.registerService.registers.push(new Register(data['registers'][i]['string_id'], data['registers'][i]['date'], 
-              data['registers'][i]['start'], data['registers'][i]['finish'], data['registers'][i]['modified']));
-              
-              if(this.registerService.todayHasRegister()){
-                this.state = true;
+              this.registerService.registers.push(new Register(data['registers'][i]['string_id'], data['registers'][i]['date'], data['registers'][i]['modified']
+              ,data['registers'][i]['nightShift']));
+
+              for (let j = 0; j < data['registers'][i]['inputs'].length; j++) {
+                this.registerService.registers[i].inputs.push(new Input(data['registers'][i]['inputs'][j]['input']));
               }
-              else{
-                this.state = false;
+              for (let j = 0; j < data['registers'][i]['outputs'].length; j++) {
+                this.registerService.registers[i].outputs.push(new Output(data['registers'][i]['outputs'][j]['output'], data['registers'][i]['outputs'][j]['reason']));
               }
               this.registers = this.registerService.registers;
           }
-
+          this.state = this.registerService.checkState();
         },      
   );
   const currentTime = new Date();

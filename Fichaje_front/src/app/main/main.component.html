@@ -14,7 +14,7 @@
     <div class="row w-100">
         <div class="col-md-3"></div>
         <div class="col-md-6 ">
-            <app-main-button [reason]="reason" [nightShift]="nightShift" (stateChange)="stateChanger($event)"></app-main-button>
+            <app-main-button [reason]="reason" [nightShift]="nightShift" [state]="state"(stateChange)="stateChanger($event)" ></app-main-button>
         </div>
         <div class="col-md-3">
             <app-night-shift (nightShift)="nightShift" *ngIf="!this.checkState()"></app-night-shift>

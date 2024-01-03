@@ -1,0 +1,19 @@
+
+.container-xl {
+    background-color: #cdcdcd70;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 10px 0px 80px rgba(0, 0, 0, 0.588); 
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 10px 0px 80px rgba(0, 0, 0, 0.428); 
+}
+
+.jumbotron{
+    background-color: #ffffffff;
+    border-radius: 10px;
+    box-shadow: 10px 0px 80px rgba(0, 0, 0, 0.43); 
+}

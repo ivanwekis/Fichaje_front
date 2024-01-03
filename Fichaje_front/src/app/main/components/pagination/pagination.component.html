@@ -9,9 +9,9 @@
       <li class="page-item">
         <button class="page-link" (click)="button(current-1)">Anterior</button>
       </li>
-      <li class="page-item"><button class="page-link" (click)="button(current-1)">{{ current-1 }}</button></li>
-      <li class="page-item"><button class="page-link" (click)="button(current)">{{ current }}</button></li>
-      <li class="page-item"><button class="page-link" (click)="button(current+1)">{{ current + 1 }}</button></li>
+      <li class="page-item"><button class="page-link" (click)="button(current-1)">{{ current}}</button></li>
+      <li class="page-item" *ngIf="maxPages > 1"><button class="page-link" (click)="button(current)">{{ current +1 }}</button></li>
+      <li class="page-item" *ngIf="maxPages > 2"><button class="page-link" (click)="button(current+1)">{{ current + 2 }}</button></li>
       <li class="page-item">
         <button class="page-link" (click)="button(current+1)">Siguiente</button>
       </li>

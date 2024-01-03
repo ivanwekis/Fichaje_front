@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RegisterService } from '../../../services/register.service';
 import { FicharService } from '../../../services/fichar.services';
-import { LoginService } from '../../../services/login.services';
 
 @Component({
   selector: 'app-main-button',
@@ -14,15 +13,21 @@ export class MainButtonComponent {
   @Input() reason: string;
   @Input() nightShift: boolean;
   showShadow: boolean = false;
-  constructor(private ficharService:FicharService, private loginService:LoginService, private registerService:RegisterService) { }
-
-
+  constructor(private ficharService:FicharService, private registerService:RegisterService) { }
+  
+  ngOnInit(): void {
+    this.state = this.registerService.checkState();
+  }
   fichar() {
     this.ficharService.fichar(this.nightShift).subscribe(
       (response: any) => {
         // Manejar la respuesta exitosa aquí
-
-        this.registerService.newRegister();
+        if (this.registerService.todayHasRegister()){
+          this.registerService.updateRegisterEntry();  
+        }
+        else {
+          this.registerService.newRegister(this.nightShift);
+        }
         this.state = true;
         this.stateChange.emit(this.state);
 
@@ -42,7 +47,7 @@ export class MainButtonComponent {
       (response: any) => {
         // Manejar la respuesta exitosa aquí
         console.log('Ha desfichado correctamente:', response);
-        this.registerService.updateRegister();
+        this.registerService.updateRegisterOut(this.reason);
         this.state = false;
         this.stateChange.emit(this.state);
       },
@@ -53,12 +58,7 @@ export class MainButtonComponent {
     );
   }
 
-
-    
-  
-
   checkState() {
-    // Comprobamos en que estado estamos (fichado o no)
     return this.state;
   }
 

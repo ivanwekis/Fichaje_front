@@ -15,28 +15,29 @@ export class ModifyRegisterComponent {
   title: string;
   content: string;
   register: Register;
-  start: Date;
-  finish: Date;
-  finished: boolean = false;
+  input_list: Date[]= [];
+  output_list: Date[] = [];
+  finished: boolean[] = [];
   constructor(private bsModalRef: BsModalRef, private modifyService:ModifyRegister) { }
   
   ngOnInit(): void {
-    if(this.register.finish == "-"){
-      if(this.isToday(this.register.date)){
-        this.finished = false;
+    for(let i=0; this.register.inputs.length > i; i++){
+      this.input_list.push(this.fromStringToDate(this.register.inputs[i].input));
+      
+      if(this.register.outputs[i].output == "-"){
+        if(this.isToday(this.register.date)){
+          this.finished.push(false);
+        }
+        else{
+          this.finished.push(true);
+          this.output_list.push(this.fromStringToDate("20:00"));
+        }
       }
       else{
-        this.finished = true;
-        this.finish = new Date();
+        this.output_list.push(this.fromStringToDate(this.register.outputs[i].output));
+        this.finished.push(true);
       }
-      
     }
-    else{
-      this.finished = true;
-      this.finish = this.fromStringToDate(this.register.finish);
-    }
-    this.start = this.fromStringToDate(this.register.start);
-    
   }
 
   show() {
@@ -44,49 +45,46 @@ export class ModifyRegisterComponent {
   }
 
   save() {
-    
-    this.register.start = this.format(this.start);
-  
-    if(this.finished == false){
-      this.register.finish = "-";
-    }
-    else{
-      this.register.finish = this.format(this.finish);
-    }
-    if(this.start < this.finish){
 
-      this.modifyService.modifyRegister(this.register).subscribe(
-        (response) => {
-          this.register.modified = true;
+    if(!this.checkRegistersBeforeSaving() && !this.register.nightShift){
+      return;
+    }
+
+    for(let i=0; this.register.inputs.length > i; i++){
+      this.register.inputs[i].input = this.format(this.input_list[i]);
+      if(this.finished[i]){
+        this.register.outputs[i].output = this.format(this.output_list[i]);
+      }
+    }
+    
+    this.modifyService.modifyRegister(this.register).subscribe(
+      (response) => {
+        this.register.modified = true;
+        this.close();
+        
+      },
+      (error) => {
+        if(error.status == 404){
+          alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
           this.close();
-          
-        },
-        (error) => {
-          if(error.status == 404){
-            alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
-            this.close();
-          }
-          else{
-            alert("Ha ocurrido un error al modificar el registro.");
-            this.close();
-          }
         }
-      );
-    }
-    else{
-      alert("La hora de entrada no puede ser mayor que la hora de salida.");
-    }
+        else{
+          alert("Ha ocurrido un error al modificar el registro.");
+          this.close();
+        }
+      }
+    );
   }
 
   close() {
     this.bsModalRef.hide();
   }
-  updateStart(event: any){
-    this.start = this.fromStringToDate(event);
+  updateInput(event: any, index: number){
+    this.input_list[index] = this.fromStringToDate(event);
   }
 
-  updateFinish(event: any){
-    this.finish = this.fromStringToDate(event);
+  updateOutput(event: any, index: number){
+    this.output_list[index] = this.fromStringToDate(event);
   }
   
   private fromStringToDate(time: string): Date {
@@ -117,5 +115,31 @@ export class ModifyRegisterComponent {
       currentDate.getMonth() === dateGet.getMonth() &&
       currentDate.getFullYear() === dateGet.getFullYear()
     );
+  }
+
+  checkRegistersBeforeSaving(): boolean{
+    for(let i=0; this.register.inputs.length > i; i++){
+      if(this.input_list[i] > this.output_list[i] && this.finished[i]){
+        alert("La hora de entrada no puede ser mayor que la de salida.");
+        return false;
+      }
+    }
+    const currentUTC = new Date();
+    currentUTC.setHours(currentUTC.getUTCHours() + 2);
+    if(this.isToday(this.register.date)){
+      for(let i=0; this.register.inputs.length > i; i++){
+        if(this.input_list[i] > currentUTC && this.finished[i]){
+          alert("La hora de entrada no puede ser mayor que la hora actual.");
+          return false;
+        }
+        if(this.output_list[i] > currentUTC && this.finished[i]){
+          console.log(this.output_list[i]);
+          console.log(currentUTC);
+          alert("La hora de salida no puede ser mayor que la hora actual.");
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { LoginService } from './login.services';
-import { Register } from '../models/register.model';
+import { Register, Input, Output } from '../models/register.model';
 
 @Injectable({
     providedIn: 'root'
@@ -23,30 +23,58 @@ export class RegisterService {
         
     }
 
-    newRegister(){
+    gerRegistersLength(){
+        return this.http.get(`${this.apiUrl}/v2/getregisterslength`, {headers: this.loginService.getAuthHeaders()});
+    }
+
+    newRegister(nightShift: boolean){
         const dateTimeDay = new Date();
         const dateTimeHour = new Date();
         this.currentDay = dateTimeDay.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
         this.currentHour =  dateTimeHour.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'});
-        this.registers.unshift(new Register(this.currentDay,this.currentDay, this.currentHour, "-"));
+        this.registers.unshift(new Register(this.currentDay,this.currentDay, false, nightShift));
+        this.registers[0].inputs.push(new Input(this.currentHour));
+        this.registers[0].outputs.push(new Output("-", "-"));
     }
 
-    updateRegister(){
+    updateRegisterEntry(){
         const dateTimeHour = new Date();
         this.currentHour =  dateTimeHour.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'});
-        this.registers[0].finish = this.currentHour;
+        this.registers[0].inputs.push(new Input(this.currentHour));
+        this.registers[0].outputs.push(new Output("-", "-"));
+    }
+
+    updateRegisterOut(reason: string){
+        const dateTimeHour = new Date();
+        this.currentHour =  dateTimeHour.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'});
+        this.registers[0].outputs.pop();
+        this.registers[0].outputs.push(new Output(this.currentHour, reason));
     }
 
     todayHasRegister(){
         const dateTimeDay = new Date();
         this.currentDay = dateTimeDay.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
         if(this.registers[0].date == this.currentDay){
-            if(this.registers[0].finish == "-"){
+            if(this.registers[0].outputs[0].output == "-" || this.registers[0].outputs.length >= 1){
                 return true;
             }
             return false;
         }
         return false;
+    }
+
+    checkState() {
+        const dateTimeDay = new Date();
+        this.currentDay = dateTimeDay.toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+        if(this.registers[0].date == this.currentDay){
+            if(this.registers[0].outputs[this.registers[0].outputs.length-1].output == "-" ){
+                return true;
+            }
+            return false;
+        }
+        else{
+            return false;
+        }
     }
 
 }

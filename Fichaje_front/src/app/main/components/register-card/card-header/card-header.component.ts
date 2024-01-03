@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Register } from '../../../../models/register.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ModifyRegisterComponent } from '../modify-register/modify-register.component';
+import { ShowInfoComponent } from '../show-info/show-info.component';
 
 @Component({
   selector: 'app-card-header',
@@ -20,6 +20,9 @@ export class CardHeaderComponent {
       register: this.register
     };
 
-    this.bsModalRef = this.modalService.show(ModifyRegisterComponent, { initialState });
-}
+    this.bsModalRef = this.modalService.show(ShowInfoComponent, {
+      class: 'modal-lg',
+       initialState });
+  }
+  
 }

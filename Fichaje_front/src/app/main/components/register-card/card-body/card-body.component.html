@@ -1,14 +1,15 @@
-
 <style>
-    .modified {
-        background-color: #ff3d3d;
+    .not-finished {
+        background-color: #3dc2ff79;
         border-radius: 8px;
-        padding-left:5px; 
-        padding-right:5px; 
+        padding-left:15px; 
+        padding-right: 15px; 
     }
 </style>
 
-<div class="card-body" (click)="showModal()" [ngStyle]="{'cursor': isClickable ? 'pointer' : 'default'}" (mouseover)="isClickable = true"  (mouseout)="isClickable = false" tooltip="Mas información"  [delay]="1000" placement="bottom">
-    <p class="card-text">Entrada: {{register.start}}</p>
-    <p class="card-text">Salida: {{register.finish}}</p>
+<div class="card-body" (click)="showModal()" [ngStyle]="{'cursor': isClickable ? 'pointer' : 'default'}" (mouseover)="isClickable = true"  (mouseout)="isClickable = false" tooltip="Modificar"  [delay]="500" placement="bottom">
+   <div [ngClass]="{'not-finished': register.outputs[register.outputs.length - 1].output === '-'}" >
+    <p class="card-text">Entrada: {{ register.inputs[0].input }}</p>
+    <p class="card-text">Salida: {{ register.outputs[register.outputs.length-1].output }}</p>
+   </div>
 </div>

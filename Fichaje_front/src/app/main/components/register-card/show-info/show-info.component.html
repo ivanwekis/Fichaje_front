@@ -1,15 +1,28 @@
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Más Información</h5>
-      </div>
-      <div class="modal-body">
 
-       
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="close()" >Cerrar</button>
-      </div>
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Más Información</h5>
     </div>
+    <div class="modal-body">
+      <ng-container *ngFor="let input of register.inputs; let i = index">
+          <div class="row">
+              <div class="col-md-4">
+                  <p class="card-text">{{i+1}}. Entrada: {{ input.input }}</p>
+              </div>
+              <div class="col-md-4">
+                  <p class="card-text">Salida: {{ register.outputs[i].output }}</p>
+              </div>
+              <div class="col-md-4">
+                <p class="card-text">Motivo: {{ register.outputs[i].reason }}</p>
+            </div>
+          </div>
+      </ng-container>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()" >Cerrar</button>
+    </div>
+  </div>
 </div>
+
+
+
