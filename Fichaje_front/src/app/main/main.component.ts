@@ -17,30 +17,10 @@ export class MainComponent {
   constructor(private loginService:LoginService, private registerService:RegisterService) { }
   
   ngOnInit(): void {
-    this.registerService.getRegisters(1, this.loginService.user).subscribe(
-      (data: any) => {
-          console.log('Registros obtenidos correctamente.');
-          for (let i = 0; i < data['registers'].length; i++) {
-              
-              if(data['registers'][i]['modified'] == null){
-                data['registers'][i]['modified'] = false;
-              }
-              this.registerService.registers.push(new Register(data['registers'][i]['string_id'], data['registers'][i]['date'], data['registers'][i]['modified']
-              ,data['registers'][i]['nightShift']));
-
-              for (let j = 0; j < data['registers'][i]['inputs'].length; j++) {
-                this.registerService.registers[i].inputs.push(new Input(data['registers'][i]['inputs'][j]['input']));
-              }
-              for (let j = 0; j < data['registers'][i]['outputs'].length; j++) {
-                this.registerService.registers[i].outputs.push(new Output(data['registers'][i]['outputs'][j]['output'], data['registers'][i]['outputs'][j]['reason']));
-              }
-              this.registers = this.registerService.registers;
-          }
-          this.state = this.registerService.checkState();
-        },      
-  );
-  const currentTime = new Date();
-  currentTime.getHours() >= 20 || currentTime.getHours() <= 4 ? this.nightShift = true : this.nightShift = false;
+    this.registers = this.registerService.registers;
+    this.state = this.registerService.checkState();
+    const currentTime = new Date();
+    currentTime.getHours() >= 20 || currentTime.getHours() <= 4 ? this.nightShift = true : this.nightShift = false;
   }
   
   stateChanger(state: boolean) {

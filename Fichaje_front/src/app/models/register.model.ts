@@ -6,20 +6,13 @@ export class Register {
     outputs: Output[];
     nightShift: boolean;
 
-    constructor(
-        string_id: string, 
-        date: string, 
-        modified: boolean,
-        nightShift: boolean,
-        inputs: Input[] = [], 
-        outputs: Output[] = []
-    ) {
-        this.date = date;
-        this.string_id = string_id;
-        this.modified = modified;
-        this.inputs = inputs;
-        this.outputs = outputs;
-        this.nightShift = nightShift;
+    constructor(data: Partial <Register>) {
+        this.date = data.date || '';
+        this.string_id = data.string_id || '';
+        this.modified = data.modified || false;
+        this.inputs = data.inputs ? data.inputs.map(input => new Input(input.input)) : [];
+        this.outputs = data.outputs ? data.outputs.map(output => new Output(output.output, output.reason)): [];
+        this.nightShift = data.nightShift || false;
     }
 }
 

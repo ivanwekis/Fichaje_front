@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { BsModalRef} from 'ngx-bootstrap/modal';
-import { UserInfo } from '../../../models/userInfo.model';
-import { UserInfoService } from '../../../services/userInfo.service';
-import { ModifyUser } from '../../../models/modifyUser.model';
+import { UserInfo } from '../../../../models/userInfo.model';
+import { ModifyUser } from '../../../../models/modifyUser.model';
+import { UserInfoService } from '../../../../services/userInfo.service';
+
 
 @Component({
   selector: 'app-navbar-modify-user-config',

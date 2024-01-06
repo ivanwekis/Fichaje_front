@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.services';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NavbarModifyUserConfigComponent } from './components/navbar-modify-user-config/navbar-modify-user-config.component';
+import { LoginService } from '../../services/login.services';
 
 @Component({
   selector: 'app-navbar',
