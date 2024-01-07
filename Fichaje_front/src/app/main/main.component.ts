@@ -1,7 +1,7 @@
 import { Component  } from '@angular/core';
 import { LoginService } from '../services/login.services';
 import { RegisterService } from '../services/register.service';
-import { Register, Output, Input} from '../models/register.model';
+import { Register } from '../models/register.model';
 
 
 @Component({

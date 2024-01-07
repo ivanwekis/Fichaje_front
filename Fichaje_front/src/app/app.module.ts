@@ -34,6 +34,7 @@ import { CardHeaderComponent } from './main/components/register-card/card-header
 import { CardBodyComponent } from './main/components/register-card/card-body/card-body.component';
 import { ShowInfoComponent } from './main/components/register-card/show-info/show-info.component'; 
 import { GetRegistersResolver } from './main/resolvers/get-registers.resolver';
+import { loginGuard } from './core/guards/can-service.guard';
 
 
 const appRoutes:Routes = [
@@ -42,7 +43,7 @@ const appRoutes:Routes = [
   {path:'logout', component:LoginComponent},
   {path:'signup', component:RegistroComponent},
   {path:'modify/:string', component:ModifyRegisterComponent},
-  {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}},
+  {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}, canActivate: [loginGuard]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },
 
