@@ -1,19 +1,18 @@
 .col-md-9{
     background-color: #ffffff2a;
-    padding-left: 1%;
+    padding-left: 2%;
     padding-right: 0%;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 20px; 
     border-bottom-right-radius: 20px;
+    padding-bottom: auto;
     box-shadow: 10px 0px 80px rgba(0, 0, 0, 0.588); 
 }
 .sidebar-css{
     background-color: #111111fb;
-    box-shadow: 10px 5px 15px rgba(27, 27, 27, 0.525);
-    height: 100%;
-    width: 80%;
-    padding-bottom: 60%;
+    box-shadow: 10px 5px 15px rgba(27, 27, 27, 0.656);
+    padding-bottom: 100vh;
 }
 
 .admin-portal{

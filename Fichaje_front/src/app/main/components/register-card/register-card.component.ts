@@ -9,4 +9,10 @@ import { Register } from '../../../models/register.model';
 export class RegisterCardComponent {
   @Input() register: Register
 
+  constructor() { }
+
+  ngOnInit(): void {
+    console.log(this.register);
+  }
+
 }

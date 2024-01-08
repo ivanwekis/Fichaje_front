@@ -12,7 +12,7 @@ import { EMPTY, catchError } from 'rxjs';
 export class PaginationComponent {
   current: number = 1;
   maxPages: number = 1;
-  constructor(private registerService: RegisterService, private loginService:LoginService,) {}
+  constructor(private registerService: RegisterService, private loginService:LoginService) {}
 
   ngOnInit(): void {
 
@@ -41,9 +41,12 @@ export class PaginationComponent {
     else{
       this.registerService.getRegisters(current, this.loginService.user).pipe(catchError(error => {console.log(error); return EMPTY})).subscribe(
         (data: any) => {
-          console.log('Registros obtenidos correctamente:');
+          
           this.registerService.registers.splice(0, this.registerService.registers.length);
-          this.registerService.registers = data.registers.map((register: Register) => new Register(register));
+          for (let i = 0; i < data.registers.length; i++) {
+            this.registerService.registers.push(new Register(data.registers[i]));
+          }
+          //this.registerService.registers = data.registers.map((register: Register) => new Register(register));
         }
       );
       this.current = current; 

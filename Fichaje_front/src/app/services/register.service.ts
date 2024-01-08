@@ -74,4 +74,8 @@ export class RegisterService {
         }
     }
 
+    searchRegisters(searchText: string){
+        return this.http.get(`${this.apiUrl}/v2/searchregisters/${searchText}`, {headers: this.loginService.getAuthHeaders()});
+    }
+
 }

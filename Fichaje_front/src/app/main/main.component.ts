@@ -2,8 +2,6 @@ import { Component  } from '@angular/core';
 import { LoginService } from '../services/login.services';
 import { RegisterService } from '../services/register.service';
 import { Register } from '../models/register.model';
-import { SideBarService } from '../services/sidebar.services';
-import { Router } from '@angular/router';
 
 
 @Component({
