@@ -1,0 +1,10 @@
+
+  <div [ngClass]="{'collapsed': isSidebarCollapsed}">
+    <div *ngIf="father == 'main'">
+      <app-main-side-bar></app-main-side-bar>
+    </div>
+    <div *ngIf="father == 'admin'">
+      <app-admin-side-bar></app-admin-side-bar>
+  </div>
+</div>
+  

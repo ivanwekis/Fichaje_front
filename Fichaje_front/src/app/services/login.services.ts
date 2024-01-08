@@ -33,6 +33,10 @@ export class LoginService {
       return this.cookie.check('token');
     }
 
+    isAdmin() {
+      return this.cookie.check('admin');
+    }
+
     getUser() {
       return this.cookie.get('user');
     }

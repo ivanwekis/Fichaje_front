@@ -30,6 +30,10 @@ export class LoginComponent {
         this.loginService.cookie.set('token', this.loginService.token, 30);
         this.loginService.cookie.set('user', this.loginService.user.getUser(), 30);
         this.loginService.cookie.set('name', response.name, 30);
+        console.log(response.admin_access);
+        if(response.admin_access == true){
+          this.loginService.cookie.set('admin', "true", 30);
+        }
         this.router.navigate(['/fichaje']);
       },
       (error) => {

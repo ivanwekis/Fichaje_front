@@ -1,0 +1,21 @@
+.sidebar {
+    position: relative;
+    background: #222222fb; 
+    height: 100%;
+    width: 100%;
+    padding-bottom: 100%;
+  
+  }
+  .collapsed {
+    display: none; 
+  }
+  
+  .toggle-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff; 
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }

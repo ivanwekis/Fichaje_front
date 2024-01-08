@@ -34,7 +34,12 @@ import { CardHeaderComponent } from './main/components/register-card/card-header
 import { CardBodyComponent } from './main/components/register-card/card-body/card-body.component';
 import { ShowInfoComponent } from './main/components/register-card/show-info/show-info.component'; 
 import { GetRegistersResolver } from './main/resolvers/get-registers.resolver';
-import { loginGuard } from './core/guards/can-service.guard';
+import { AuthGuardLogin } from './core/guards/login-service.guard';
+import { AuthGuardAdmin } from './core/guards/admin-service.guard';
+import { AdminComponent } from './admin/admin.component';
+import { SideBarComponent } from './core/side-bar/side-bar.component';
+import { MainSideBarComponent } from './core/side-bar/components/main-side-bar/main-side-bar.component';
+import { AdminSideBarComponent } from './core/side-bar/components/admin-side-bar/admin-side-bar.component';
 
 
 const appRoutes:Routes = [
@@ -43,7 +48,8 @@ const appRoutes:Routes = [
   {path:'logout', component:LoginComponent},
   {path:'signup', component:RegistroComponent},
   {path:'modify/:string', component:ModifyRegisterComponent},
-  {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}, canActivate: [loginGuard]},
+  {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}, canActivate: [AuthGuardLogin]},
+  {path:'admin', component:AdminComponent, canActivate: [AuthGuardAdmin]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },
 
@@ -68,6 +74,10 @@ const appRoutes:Routes = [
     CardHeaderComponent,
     CardBodyComponent,
     ShowInfoComponent,
+    AdminComponent,
+    SideBarComponent,
+    MainSideBarComponent,
+    AdminSideBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +101,8 @@ const appRoutes:Routes = [
     ModifyRegister,
     UserInfoService,
     provideAnimations(),
+    AuthGuardAdmin,
+    AuthGuardLogin,
   ],
   bootstrap: [AppComponent]
 })

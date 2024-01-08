@@ -1,29 +1,27 @@
-<style>
-    .container {
-        background-color: #ffffff51;
-        padding: 40px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 20px; 
-        border-bottom-right-radius: 20px;
-        box-shadow: 10px 0px 80px rgba(0, 0, 0, 0.588); 
-    }
-</style>
 
-<div class="container" *ngIf="this.isLogin()">
-    <div class="row w-100">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 ">
-            <app-main-button [reason]="reason" [nightShift]="nightShift" [state]="state"(stateChange)="stateChanger($event)" ></app-main-button>
+<div class="container-fluid" *ngIf="this.isLogin()">
+    <div class="row">
+        <div class="col-md-2 sidebar-css" >
+            <app-side-bar [isSidebarCollapsed]="isSidebarCollapsed" [father]="'main'"></app-side-bar>
         </div>
-        <div class="col-md-3">
-            <app-night-shift (nightShift)="nightShift" *ngIf="!this.checkState()"></app-night-shift>
-            <app-dropdown-reason (reasonChange)="reasonChoosen($event)" *ngIf="this.checkState()"></app-dropdown-reason>
-        </div>
-            <app-register-table [registers]="registers"></app-register-table>
-    
-        <div class="mt-1">
-            <app-pagination></app-pagination>
+        <div class="col-md-9 ml-4">
+            <div class="row w-100 mt-2">
+                <div class="col-md-3">
+                    <a class="btn btn-block btn-primary admin-portal" href="/admin" *ngIf="adminPermission">Portal de Administrador</a>
+                </div>
+                <div class="col-md-6 ">
+                    <app-main-button [reason]="reason" [nightShift]="nightShift" [state]="state"(stateChange)="stateChanger($event)" ></app-main-button>
+                </div>
+                <div class="col-md-3">
+                    <app-night-shift (nightShift)="nightShift" *ngIf="!this.checkState()"></app-night-shift>
+                    <app-dropdown-reason (reasonChange)="reasonChoosen($event)" *ngIf="this.checkState()"></app-dropdown-reason>
+                </div>
+                    <app-register-table [registers]="registers"></app-register-table>
+            
+                <div class="mt-1">
+                    <app-pagination></app-pagination>
+                </div>
+            </div>
         </div>
     </div>
 </div>

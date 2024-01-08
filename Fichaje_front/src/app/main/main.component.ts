@@ -2,6 +2,8 @@ import { Component  } from '@angular/core';
 import { LoginService } from '../services/login.services';
 import { RegisterService } from '../services/register.service';
 import { Register } from '../models/register.model';
+import { SideBarService } from '../services/sidebar.services';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,6 +16,10 @@ export class MainComponent {
   registers: Register[];
   nightShift: boolean = false;
   reason: string="-";
+  isSidebarCollapsed = false;
+  adminPermission: boolean = true;
+
+  
   constructor(private loginService:LoginService, private registerService:RegisterService) { }
   
   ngOnInit(): void {
@@ -21,8 +27,9 @@ export class MainComponent {
     this.state = this.registerService.checkState();
     const currentTime = new Date();
     currentTime.getHours() >= 20 || currentTime.getHours() <= 4 ? this.nightShift = true : this.nightShift = false;
+    this.adminPermission = this.loginService.isAdmin();
   }
-  
+
   stateChanger(state: boolean) {
     this.state = state;
   }
@@ -45,5 +52,9 @@ export class MainComponent {
     const endColor = this.isLogin() ? '#343a40' : '#9d9d9d'; // Color de fin para login y no login
   
     return `linear-gradient(to right bottom, ${startColor}, ${endColor})`;
+  }
+
+  toggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 }
