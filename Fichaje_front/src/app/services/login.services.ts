@@ -27,6 +27,8 @@ export class LoginService {
 
     logout() {
       this.cookie.delete('token');
+      this.cookie.delete('user');
+      this.cookie.delete('admin');
     }
 
     isLogin() {

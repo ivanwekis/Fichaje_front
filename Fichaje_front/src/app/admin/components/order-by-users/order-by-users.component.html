@@ -1,0 +1,11 @@
+<div class="btn-group" dropdown>
+    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary btn-block dropdown-toggle"
+            aria-controls="dropdown-basic">Ordenar por<span class="caret"></span>
+    </button>
+    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+        role="menu" aria-labelledby="button-basic">
+      <li role="menuitem" *ngFor="let sort of sortBy">
+        <a class="dropdown-item" (click)="reasonChoosen(sort)">{{ sort}}</a>
+      </li>
+    </ul>
+  </div>

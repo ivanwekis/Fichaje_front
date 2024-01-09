@@ -40,6 +40,11 @@ import { AdminComponent } from './admin/admin.component';
 import { SideBarComponent } from './core/side-bar/side-bar.component';
 import { MainSideBarComponent } from './core/side-bar/components/main-side-bar/main-side-bar.component';
 import { AdminSideBarComponent } from './core/side-bar/components/admin-side-bar/admin-side-bar.component';
+import { AdminService } from './services/admin.services';
+import { UsersTableComponent } from './admin/components/users-table/users-table.component';
+import { SearchUsersComponent } from './admin/components/search-users/search-users.component';
+import { OrderByUsersComponent } from './admin/components/order-by-users/order-by-users.component';
+import { UsersTablePaginationComponent } from './admin/components/users-table-pagination/users-table-pagination.component';
 
 
 const appRoutes:Routes = [
@@ -49,7 +54,7 @@ const appRoutes:Routes = [
   {path:'signup', component:RegistroComponent},
   {path:'modify/:string', component:ModifyRegisterComponent},
   {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}, canActivate: [AuthGuardLogin]},
-  {path:'admin', component:AdminComponent, canActivate: [AuthGuardAdmin]},
+  {path:'admin', component:AdminComponent, canActivate: [AuthGuardAdmin], resolve: {users: GetRegistersResolver}},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },
 
@@ -78,6 +83,10 @@ const appRoutes:Routes = [
     SideBarComponent,
     MainSideBarComponent,
     AdminSideBarComponent,
+    UsersTableComponent,
+    SearchUsersComponent,
+    OrderByUsersComponent,
+    UsersTablePaginationComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +107,7 @@ const appRoutes:Routes = [
     FicharService,
     RegisterService,
     CookieService,
+    AdminService,
     ModifyRegister,
     UserInfoService,
     provideAnimations(),

@@ -15,7 +15,7 @@ export class MainComponent {
   nightShift: boolean = false;
   reason: string="-";
   isSidebarCollapsed = false;
-  adminPermission: boolean = true;
+  adminPermission: boolean = false;
 
   
   constructor(private loginService:LoginService, private registerService:RegisterService) { }
