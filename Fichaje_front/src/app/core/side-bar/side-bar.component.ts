@@ -1,5 +1,4 @@
 import { Component, Input} from '@angular/core';
-import { SideBarService } from '../../services/sidebar.services';
 
 @Component({
   selector: 'app-side-bar',
@@ -13,7 +12,7 @@ export class SideBarComponent {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 
-  constructor(private sidebarService: SideBarService) {}
+  constructor() {}
 
   ngOnInit(): void {
 

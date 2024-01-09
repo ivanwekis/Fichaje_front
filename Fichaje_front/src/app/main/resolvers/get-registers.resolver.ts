@@ -18,7 +18,6 @@ export class GetRegistersResolver implements Resolve<Observable<any>> {
 
     return this.registerService.getRegisters(page, this.loginService.user).pipe(
       tap((data: any) => {
-        console.log('Registros obtenidos correctamente.');
         this.registerService.registers = data.registers.map((register: Register) => new Register(register));
       })
     );

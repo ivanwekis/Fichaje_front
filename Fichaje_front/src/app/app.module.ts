@@ -40,6 +40,7 @@ import { AdminComponent } from './admin/admin.component';
 import { SideBarComponent } from './core/side-bar/side-bar.component';
 import { MainSideBarComponent } from './core/side-bar/components/main-side-bar/main-side-bar.component';
 import { AdminSideBarComponent } from './core/side-bar/components/admin-side-bar/admin-side-bar.component';
+import { AdminService } from './services/admin.services';
 
 
 const appRoutes:Routes = [
@@ -98,6 +99,7 @@ const appRoutes:Routes = [
     FicharService,
     RegisterService,
     CookieService,
+    AdminService,
     ModifyRegister,
     UserInfoService,
     provideAnimations(),

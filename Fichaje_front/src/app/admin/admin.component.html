@@ -2,14 +2,47 @@
   
 </style>
 <div class="container-fluid">
-    <div class="row w-100">
-      <div class="col-md-2">
-        <!--<button (click)="toggleSidebar()">Toggle Sidebar</button>-->
-        <app-side-bar [isSidebarCollapsed]="isSidebarCollapsed " [father]="'admin'"></app-side-bar >
+  <div class="row w-100 ">
+    <div class="col-md-2">
+      <app-side-bar [isSidebarCollapsed]="isSidebarCollapsed " [father]="'admin'"></app-side-bar >
+    </div>
+    <div class="col-md-10 mt-4">
+      <div class="col-md-4">
+        <div class="btn-group" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-primary btn-block dropdown-toggle"
+                  aria-controls="dropdown-basic">Ordenar por<span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-basic">
+            <li role="menuitem" *ngFor="let sort of sortBy"><a class="dropdown-item" (click)="reasonChoosen(sort)">{{ sort}}</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Otros</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-10">
-        <p>holaa</p>
+      <div class="col-md-8">
+
+      </div>
+      <div class="col-md-12 mt-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of usersData">
+              <td>{{user.name}}</td>
+              <td>{{user.surname}}</td>
+              <td>{{user.email}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
   
