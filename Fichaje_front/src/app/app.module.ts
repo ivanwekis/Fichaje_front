@@ -36,15 +36,19 @@ import { ShowInfoComponent } from './main/components/register-card/show-info/sho
 import { GetRegistersResolver } from './main/resolvers/get-registers.resolver';
 import { AuthGuardLogin } from './core/guards/login-service.guard';
 import { AuthGuardAdmin } from './core/guards/admin-service.guard';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './admin-dashboard/admin.component';
 import { SideBarComponent } from './core/side-bar/side-bar.component';
 import { MainSideBarComponent } from './core/side-bar/components/main-side-bar/main-side-bar.component';
 import { AdminSideBarComponent } from './core/side-bar/components/admin-side-bar/admin-side-bar.component';
 import { AdminService } from './services/admin.services';
-import { UsersTableComponent } from './admin/components/users-table/users-table.component';
-import { SearchUsersComponent } from './admin/components/search-users/search-users.component';
-import { OrderByUsersComponent } from './admin/components/order-by-users/order-by-users.component';
-import { UsersTablePaginationComponent } from './admin/components/users-table-pagination/users-table-pagination.component';
+import { UsersTableComponent } from './admin-dashboard/components/users-table/users-table.component';
+import { SearchUsersComponent } from './admin-dashboard/components/search-users/search-users.component';
+import { OrderByUsersComponent } from './admin-dashboard/components/order-by-users/order-by-users.component';
+import { UsersTablePaginationComponent } from './admin-dashboard/components/users-table-pagination/users-table-pagination.component';
+import { AdminUserRegisterHistoryComponent } from './admin-user-register-history/admin-user-register-history.component';
+import { AdminUserRegisterSideBarComponent } from './core/side-bar/components/admin-user-register-side-bar/admin-user-register-side-bar.component';
+import { User } from './models/user.model';
+import { UserHistoryService } from './services/user-history.service';
 
 
 const appRoutes:Routes = [
@@ -54,7 +58,8 @@ const appRoutes:Routes = [
   {path:'signup', component:RegistroComponent},
   {path:'modify/:string', component:ModifyRegisterComponent},
   {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}, canActivate: [AuthGuardLogin]},
-  {path:'admin', component:AdminComponent, canActivate: [AuthGuardAdmin], resolve: {users: GetRegistersResolver}},
+  {path:'admin/dashboard', component:AdminComponent, canActivate: [AuthGuardAdmin], resolve: {users: GetRegistersResolver}},
+  {path:'admin/user-history', component:AdminUserRegisterHistoryComponent, canActivate: [AuthGuardAdmin]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },
 
@@ -87,6 +92,8 @@ const appRoutes:Routes = [
     SearchUsersComponent,
     OrderByUsersComponent,
     UsersTablePaginationComponent,
+    AdminUserRegisterHistoryComponent,
+    AdminUserRegisterSideBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +117,7 @@ const appRoutes:Routes = [
     AdminService,
     ModifyRegister,
     UserInfoService,
+    UserHistoryService,
     provideAnimations(),
     AuthGuardAdmin,
     AuthGuardLogin,

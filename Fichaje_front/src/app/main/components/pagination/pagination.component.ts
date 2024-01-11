@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { RegisterService } from '../../../services/register.service';
 import { LoginService } from '../../../services/login.services';
 import { Register, Input, Output } from '../../../models/register.model';
 import { EMPTY, catchError } from 'rxjs';
+import { AdminService } from '../../../services/admin.services';
+import { UserHistoryService } from '../../../services/user-history.service';
 
 @Component({
   selector: 'app-pagination',
@@ -12,7 +14,8 @@ import { EMPTY, catchError } from 'rxjs';
 export class PaginationComponent {
   current: number = 1;
   maxPages: number = 1;
-  constructor(private registerService: RegisterService, private loginService:LoginService) {}
+  constructor(private registerService: RegisterService, private loginService:LoginService,
+    private adminService:AdminService, private userHistory:UserHistoryService) {}
 
   ngOnInit(): void {
 
@@ -21,7 +24,6 @@ export class PaginationComponent {
         this.maxPages = Math.ceil(data['registers_length']/12);
       },
       (error) => {
-        // Manejar errores aquí
         console.log(error);
       }
     );
@@ -39,17 +41,28 @@ export class PaginationComponent {
       alert("Has llegado al límite. No hay más registros.");
     }
     else{
-      this.registerService.getRegisters(current, this.loginService.user).pipe(catchError(error => {console.log(error); return EMPTY})).subscribe(
-        (data: any) => {
-          
-          this.registerService.registers.splice(0, this.registerService.registers.length);
-          for (let i = 0; i < data.registers.length; i++) {
-            this.registerService.registers.push(new Register(data.registers[i]));
+      if (this.loginService.isAdmin() && this.adminService.selectedUser.email != ""){
+        this.userHistory.getRegistersByUser(this.adminService.selectedUser,current).pipe(catchError(error => {console.log(error); return EMPTY})).subscribe(
+          (data: any) => {
+            this.userHistory.registers.splice(0, this.registerService.registers.length);
+            for (let i = 0; i < data.registers.length; i++) {
+              this.userHistory.registers.push(new Register(data.registers[i]));
+            }
           }
-          //this.registerService.registers = data.registers.map((register: Register) => new Register(register));
-        }
-      );
-      this.current = current; 
+        );
+        this.current = current; 
+      }
+      else{
+        this.registerService.getRegisters(current, this.loginService.user).pipe(catchError(error => {console.log(error); return EMPTY})).subscribe(
+          (data: any) => {
+            this.registerService.registers.splice(0, this.registerService.registers.length);
+            for (let i = 0; i < data.registers.length; i++) {
+              this.registerService.registers.push(new Register(data.registers[i]));
+            }
+          }
+        );
+        this.current = current; 
+      }
     }
   }
 }

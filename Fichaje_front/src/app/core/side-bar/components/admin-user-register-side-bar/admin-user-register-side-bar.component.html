@@ -1,0 +1,14 @@
+<div class="sidebar mt-4">
+    <ul class="nav flex-column">
+      <form>
+        <input type="button" class="btn btn-block btn-primary mb-2" value="Volver" (click)="this.comeBack()">
+        <input type="text" class="form-control" placeholder="dd/mm/yyyy" name="SearchText" [(ngModel)]="searchText">
+        <input type="submit" class="btn btn-block btn-primary mt-2" value="Buscar" (click)="this.searchButton()">
+      </form>
+      <div *ngFor="let register of registers; let i = index">
+          <ng-container *ngIf="i<3">
+            <app-register-card [register]="register"></app-register-card>
+        </ng-container>
+      </div>
+    </ul>
+</div>

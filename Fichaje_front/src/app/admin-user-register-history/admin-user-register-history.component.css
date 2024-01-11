@@ -1,0 +1,7 @@
+.col-md-2{
+    background-color: #111111fb;
+    box-shadow: 10px 5px 20px rgba(27, 27, 27, 0.685);
+    height: 100%;
+    width: 100%;
+    padding-bottom: 100%;
+  }

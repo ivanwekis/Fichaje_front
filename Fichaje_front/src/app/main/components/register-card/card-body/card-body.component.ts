@@ -24,7 +24,6 @@ export class CardBodyComponent {
     const initialState = {
       register: this.register
     };
-
     this.bsModalRef = this.modalService.show(ModifyRegisterComponent, { initialState });
   }
 

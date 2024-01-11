@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Register } from '../../../../models/register.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModifyRegister } from '../../../../services/modify.service';
+import { UserHistoryService } from '../../../../services/user-history.service';
+import { LoginService } from '../../../../services/login.services';
 
 
 
@@ -18,7 +20,8 @@ export class ModifyRegisterComponent {
   input_list: Date[]= [];
   output_list: Date[] = [];
   finished: boolean[] = [];
-  constructor(private bsModalRef: BsModalRef, private modifyService:ModifyRegister) { }
+  constructor(private bsModalRef: BsModalRef, private modifyService:ModifyRegister,
+     private loginService:LoginService ,private userHistory: UserHistoryService) { }
   
   ngOnInit(): void {
     for(let i=0; this.register.inputs.length > i; i++){
@@ -56,24 +59,45 @@ export class ModifyRegisterComponent {
         this.register.outputs[i].output = this.format(this.output_list[i]);
       }
     }
+    if(this.loginService.isAdmin()){
+      this.userHistory.modifyRegisterByUser(this.register).subscribe(
+        (response) => {
+          this.register.modified = true;
+          this.close();
+          
+        },
+        (error) => {
+          if(error.status == 404){
+            alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
+            this.close();
+          }
+          else{
+            alert("Ha ocurrido un error al modificar el registro.");
+            this.close();
+          }
+        }
+      );
+    }
+    else{
+      this.modifyService.modifyRegister(this.register).subscribe(
+        (response) => {
+          this.register.modified = true;
+          this.close();
+          
+        },
+        (error) => {
+          if(error.status == 404){
+            alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
+            this.close();
+          }
+          else{
+            alert("Ha ocurrido un error al modificar el registro.");
+            this.close();
+          }
+        }
+      );
+    }
     
-    this.modifyService.modifyRegister(this.register).subscribe(
-      (response) => {
-        this.register.modified = true;
-        this.close();
-        
-      },
-      (error) => {
-        if(error.status == 404){
-          alert("No se ha podido modificar el registro por que no se encuentra en la base de datos.");
-          this.close();
-        }
-        else{
-          alert("Ha ocurrido un error al modificar el registro.");
-          this.close();
-        }
-      }
-    );
   }
 
   close() {
@@ -88,6 +112,7 @@ export class ModifyRegisterComponent {
   }
   
   private fromStringToDate(time: string): Date {
+    console.log(time);
     if (!time || typeof time !== 'string' || !/^\d{2}:\d{2}$/.test(time)) {
       throw new Error('Formato de tiempo no válido');
     }

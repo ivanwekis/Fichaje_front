@@ -11,6 +11,10 @@ import { UserData } from './models/userdata.model';
 export class AdminComponent {
   isSidebarCollapsed = false;
   usersData:UserData[] = [];
+  selectedUser:UserData;
+  tableClickEvent:boolean = false;
+
+
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {

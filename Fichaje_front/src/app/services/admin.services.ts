@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginService } from './login.services';
-import { UserData } from '../admin/models/userdata.model';
+import { UserData } from '../admin-dashboard/models/userdata.model';
 
 
 @Injectable({
@@ -12,6 +12,7 @@ export class AdminService {
     private apiUrl = 'http://localhost:8000';
     usersData:UserData[] = [];
     usersDataFiltered:UserData[] = [];
+    selectedUser:UserData = new UserData({email:""});
     max_pages: number;
     current_page = 1;
     constructor(private http: HttpClient ,private loginService:LoginService) { }
@@ -29,6 +30,11 @@ export class AdminService {
         });
         this.max_pages = Math.ceil(this.usersDataFiltered.length / 10);
         this.current_page = 1;
+    }
+
+    searchRegistersForUser(searchText:string){
+        return this.http.get(`${this.apiUrl}/v3/searchregistersbyuser/${this.selectedUser.username}/${searchText}`
+        , {headers: this.loginService.getAuthHeaders()});
     }
 
     sortBy(sortFilter:string){
