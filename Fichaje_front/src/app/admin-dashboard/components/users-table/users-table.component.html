@@ -1,37 +1,16 @@
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  td {
-    cursor: pointer;
-    transition: background-color 0.4s;
-  }
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-    
-  }
-  td:hover {
-    background-color: #d5d5d5b9;
-  }
-</style>
 <table class="table">
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>Apellidos</th>
         <th>Email</th>
+        <th>Nombre de Usuario</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of usersData.slice((current_page-1)*10,current_page*10); let i = index" (click)="handleClick(user.email)">
-        <td>{{user.name}}</td>
-        <td>{{user.surname}}</td>
-        <td>{{user.email}}</td>
+      <tr *ngFor="let user of usersData.slice((current_page-1)*10,current_page*10); let i = index">
+        <td tooltip="Historial"  [delay]="400" placement="bottom" (click)="handleClick(user.email)">{{user.name + " " +user.surname}}</td>
+        <td tooltip="Historial"  [delay]="400" placement="bottom" (click)="handleClick(user.email)">{{user.email}}</td>
+        <td tooltip="Modificar"  [delay]="400" placement="bottom" (click)="modifyUser(user.username)">{{user.username}}</td>
       </tr>
     </tbody>
 </table>

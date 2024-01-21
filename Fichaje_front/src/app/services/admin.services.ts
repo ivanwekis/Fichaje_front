@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginService } from './login.services';
 import { UserData } from '../admin-dashboard/models/userdata.model';
+import { NewUser } from '../admin-dashboard/models/newuser.model';
 
 
 @Injectable({
@@ -35,6 +36,18 @@ export class AdminService {
     searchRegistersForUser(searchText:string){
         return this.http.get(`${this.apiUrl}/v3/searchregistersbyuser/${this.selectedUser.username}/${searchText}`
         , {headers: this.loginService.getAuthHeaders()});
+    }
+
+    AddNewUser(newUser:NewUser){
+        return this.http.post(`${this.apiUrl}/v3/addnewuser`, newUser, {headers: this.loginService.getAuthHeaders()});
+    }
+
+    ModifyUserData(user:UserData){
+        return this.http.put(`${this.apiUrl}/v3/modifyuserdata`, user, {headers: this.loginService.getAuthHeaders()});
+    }
+
+    DeleteUser(dni:string){
+        return this.http.delete(`${this.apiUrl}/v3/deleteuser/${dni}`, {headers: this.loginService.getAuthHeaders()});
     }
 
     sortBy(sortFilter:string){

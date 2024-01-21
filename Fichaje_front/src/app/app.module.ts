@@ -49,6 +49,9 @@ import { AdminUserRegisterHistoryComponent } from './admin-user-register-history
 import { AdminUserRegisterSideBarComponent } from './core/side-bar/components/admin-user-register-side-bar/admin-user-register-side-bar.component';
 import { User } from './models/user.model';
 import { UserHistoryService } from './services/user-history.service';
+import { AddNewUserComponent } from './admin-dashboard/components/add-new-user/add-new-user.component';
+import { ModifyUserDataComponent } from './admin-dashboard/components/modify-user-data/modify-user-data.component';
+import { ConfirmationDeleteUserComponent } from './admin-dashboard/components/confirmation-delete-user/confirmation-delete-user.component';
 
 
 const appRoutes:Routes = [
@@ -94,6 +97,9 @@ const appRoutes:Routes = [
     UsersTablePaginationComponent,
     AdminUserRegisterHistoryComponent,
     AdminUserRegisterSideBarComponent,
+    AddNewUserComponent,
+    ModifyUserDataComponent,
+    ConfirmationDeleteUserComponent,
   ],
   imports: [
     BrowserModule,

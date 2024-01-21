@@ -19,6 +19,7 @@ export class AdminComponent {
 
   ngOnInit(): void {
     this.adminService.getUsers().subscribe((data:any) => {
+      console.log(data);
       this.adminService.usersData = data.map((user: UserData) => new UserData(user));
       this.usersData = this.adminService.usersData;
       this.adminService.max_pages = Math.ceil(this.usersData.length / 10);
