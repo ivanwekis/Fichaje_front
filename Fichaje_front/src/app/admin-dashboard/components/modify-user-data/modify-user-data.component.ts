@@ -36,6 +36,7 @@ export class ModifyUserDataComponent {
       username: this.user.username,
       phone: this.user.phone,
       company: this.user.company,
+      last_register: this.user.last_register,
       role: this.user.role,
       admin_access: this.user.admin_access,
       id: this.user.id

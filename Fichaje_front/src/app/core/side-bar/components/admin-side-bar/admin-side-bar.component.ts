@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddNewUserComponent } from '../../../../admin-dashboard/components/add-new-user/add-new-user.component';
+import { LoginService } from '../../../../services/login.services';
 
 @Component({
   selector: 'app-admin-side-bar',
@@ -9,7 +10,10 @@ import { AddNewUserComponent } from '../../../../admin-dashboard/components/add-
 })
 export class AdminSideBarComponent {
   bsModalRef: BsModalRef;
-  constructor(private modalService: BsModalService) { }
+  AdminDni: any;
+  constructor(private modalService: BsModalService, private loginService: LoginService) {
+    this.AdminDni = this.loginService.getDni();
+   }
 
   newUser() {
     const initialState = {

@@ -52,6 +52,7 @@ import { UserHistoryService } from './services/user-history.service';
 import { AddNewUserComponent } from './admin-dashboard/components/add-new-user/add-new-user.component';
 import { ModifyUserDataComponent } from './admin-dashboard/components/modify-user-data/modify-user-data.component';
 import { ConfirmationDeleteUserComponent } from './admin-dashboard/components/confirmation-delete-user/confirmation-delete-user.component';
+import { AdminStatsComponent } from './admin-stats/admin-stats.component';
 
 
 const appRoutes:Routes = [
@@ -63,6 +64,7 @@ const appRoutes:Routes = [
   {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}, canActivate: [AuthGuardLogin]},
   {path:'admin/dashboard', component:AdminComponent, canActivate: [AuthGuardAdmin], resolve: {users: GetRegistersResolver}},
   {path:'admin/user-history', component:AdminUserRegisterHistoryComponent, canActivate: [AuthGuardAdmin]},
+  {path:'admin/stats/:string', component:AdminStatsComponent, canActivate: [AuthGuardAdmin]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },
 
@@ -100,6 +102,7 @@ const appRoutes:Routes = [
     AddNewUserComponent,
     ModifyUserDataComponent,
     ConfirmationDeleteUserComponent,
+    AdminStatsComponent,
   ],
   imports: [
     BrowserModule,

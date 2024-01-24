@@ -6,6 +6,7 @@
       <li class="nav-item mt-5">
         <a class="btn btn-block btn-primary"  routerLink="/admin/dashboard">Panel de control</a>
         <a class="btn btn-block btn-primary"  (click)="newUser()">Alta usuario</a>
+        <a class="btn btn-block btn-primary"  [href]="'/admin/stats/'+AdminDni">Estadísticas</a>
         <a class="btn btn-block btn-primary mt-1"  routerLink="/admin/configuration">Configuracion</a>
       </li>
     </ul>

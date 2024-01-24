@@ -45,6 +45,10 @@ export class UsersTableComponent {
     
   }
 
+  showStats(dni:string){
+    this.route.navigate(['/admin/stats', dni]);
+  }
+
   paginationEvent(paginationEvent:boolean){
     if(paginationEvent){
       this.current_page = this.adminService.current_page;

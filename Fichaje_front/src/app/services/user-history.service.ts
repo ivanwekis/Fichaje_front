@@ -15,12 +15,12 @@ export class UserHistoryService {
     constructor(private http: HttpClient ,private loginService:LoginService, private adminService:AdminService) { }
 
     getRegistersByUser(user:UserData, page:number){
-        return this.http.get(`${this.apiUrl}/v3/getregistersbyuser/${user.username}/${page}`,
+        return this.http.get(`${this.apiUrl}/v3/getregistersbyuser/${user.dni}/${page}`,
         {headers: this.loginService.getAuthHeaders()});
     }
 
     modifyRegisterByUser(register: Register){
-        return this.http.put(`${this.apiUrl}/v3/modifyregisterbyuser/${this.adminService.selectedUser.username}`, register,
+        return this.http.put(`${this.apiUrl}/v3/modifyregisterbyuser/${this.adminService.selectedUser.dni}`, register,
         {headers: this.loginService.getAuthHeaders()});
     }
 }

@@ -4,6 +4,7 @@
         <th>Nombre</th>
         <th>Email</th>
         <th>Nombre de Usuario</th>
+        <th>Ultimo registro</th>
       </tr>
     </thead>
     <tbody>
@@ -11,6 +12,7 @@
         <td tooltip="Historial"  [delay]="400" placement="bottom" (click)="handleClick(user.email)">{{user.name + " " +user.surname}}</td>
         <td tooltip="Historial"  [delay]="400" placement="bottom" (click)="handleClick(user.email)">{{user.email}}</td>
         <td tooltip="Modificar"  [delay]="400" placement="bottom" (click)="modifyUser(user.username)">{{user.username}}</td>
+        <td tooltip="Estadísticas"  [delay]="400" placement="bottom" (click)="showStats(user.dni)">{{user.last_register}}</td>
       </tr>
     </tbody>
 </table>

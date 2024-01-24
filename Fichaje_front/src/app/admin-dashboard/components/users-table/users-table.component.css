@@ -6,7 +6,7 @@ table {
   }
 td {
 cursor: pointer;
-transition: background-color 0.4s;
+transition: background-color 0.3s;
 }
 th, td {
 border: 1px solid #ddd;

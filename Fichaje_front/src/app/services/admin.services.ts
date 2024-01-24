@@ -34,7 +34,8 @@ export class AdminService {
     }
 
     searchRegistersForUser(searchText:string){
-        return this.http.get(`${this.apiUrl}/v3/searchregistersbyuser/${this.selectedUser.username}/${searchText}`
+        console.log(this.selectedUser.dni);
+        return this.http.get(`${this.apiUrl}/v3/searchregistersbyuser/${this.selectedUser.dni}/${searchText}`
         , {headers: this.loginService.getAuthHeaders()});
     }
 

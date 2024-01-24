@@ -10,7 +10,7 @@ import { UserData } from '../../models/userdata.model';
   styleUrl: './add-new-user.component.css'
 })
 export class AddNewUserComponent {
-  newUser: NewUser=new NewUser("","","","","","","",false);
+  newUser: NewUser=new NewUser("","","","","","","","",false);
   constructor(private bsModalRef: BsModalRef, private adminService: AdminService) { } 
   close() {
     this.bsModalRef.hide();
@@ -69,6 +69,10 @@ export class AddNewUserComponent {
       alert("El rol debe tener al menos 2 caracteres.");
       return false;
     }
+    if (this.checkDNI(this.newUser.dni)) {
+      alert("La contraseña debe tener al menos 10 caracteres.");
+      return false;
+    }
     if(this.checkEmail(this.newUser.email)){
       alert("Email no válido.");
       return false;
@@ -78,6 +82,14 @@ export class AddNewUserComponent {
       return false;
     }
   return true;
+  }
+  checkDNI(dni:string) {
+    const dniRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+    if (dniRegex.test(dni)) {
+      return true;
+    } else {
+      return false;
+    }
   }
   checkPhone(phone:string) {
     const phoneRegex = /^[0-9]{9}$/;

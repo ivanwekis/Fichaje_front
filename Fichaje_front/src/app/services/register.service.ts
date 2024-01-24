@@ -17,7 +17,7 @@ export class RegisterService {
     }
 
     getRegisters(page: number , user: User) {
-        return this.http.post(`${this.apiUrl}/v2/getregisters/${page}`, {username: user.user}, {headers: this.loginService.getAuthHeaders()});
+        return this.http.get(`${this.apiUrl}/v2/getregisters/${page}`, {headers: this.loginService.getAuthHeaders()});
     }
 
     gerRegistersLength(){

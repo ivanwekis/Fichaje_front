@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user.model';
-import { get } from 'http';
 
 @Injectable()
 export class LoginService {
@@ -29,6 +28,12 @@ export class LoginService {
       this.cookie.delete('token');
       this.cookie.delete('user');
       this.cookie.delete('admin');
+      this.cookie.delete('name');
+      this.cookie.delete('dni');
+    }
+
+    getDni() {
+      return this.cookie.get('dni');
     }
 
     isLogin() {

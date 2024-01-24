@@ -19,15 +19,11 @@ export class NavbarModifyUserConfigComponent {
   
 
   constructor(private bsModalRef: BsModalRef, private userInfoService: UserInfoService) { 
-    this.userInfo = new UserInfo("","","","","");
+    this.userInfo = new UserInfo({});
   }
   ngOnInit() {
     this.userInfoService.getUserInfo().subscribe((data: any) => {
-      this.userInfo.username = data['username'];
-      this.userInfo.company = data['company'];
-      this.userInfo.email = data['email'];
-      this.userInfo.name = data['name'];
-      this.userInfo.surname = data['surname'];
+      this.userInfo = data;
     });
 
   }

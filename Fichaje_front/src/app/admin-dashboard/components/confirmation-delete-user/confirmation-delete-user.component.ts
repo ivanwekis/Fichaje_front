@@ -13,8 +13,9 @@ export class ConfirmationDeleteUserComponent {
   message: string = '¿Estás seguro de que quieres borrar este usuario?';
   constructor(private bsModalRef: BsModalRef, private adminService: AdminService) { }
   confirm() {
-    this.adminService.DeleteUser(this.adminService.selectedUser.username).subscribe(
+    this.adminService.DeleteUser(this.adminService.selectedUser.dni).subscribe(
       data => {
+        this.adminService.usersData.splice(this.adminService.usersData.indexOf(this.adminService.selectedUser), 1);
         alert("Usuario borrado correctamente.");
       },
       error => {
