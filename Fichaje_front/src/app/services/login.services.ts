@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LoginService {
@@ -9,7 +10,7 @@ export class LoginService {
     token:string;
     user: User;
     
-    constructor(private http: HttpClient, public cookie:CookieService) {
+    constructor(private http: HttpClient, public cookie:CookieService, private router: Router) {
       this.user = new User();
       this.user.setUser(this.getUser());
      }
@@ -30,6 +31,7 @@ export class LoginService {
       this.cookie.delete('admin');
       this.cookie.delete('name');
       this.cookie.delete('dni');
+      this.router.navigate(['/login']);
     }
 
     getDni() {

@@ -47,12 +47,15 @@ import { OrderByUsersComponent } from './admin-dashboard/components/order-by-use
 import { UsersTablePaginationComponent } from './admin-dashboard/components/users-table-pagination/users-table-pagination.component';
 import { AdminUserRegisterHistoryComponent } from './admin-user-register-history/admin-user-register-history.component';
 import { AdminUserRegisterSideBarComponent } from './core/side-bar/components/admin-user-register-side-bar/admin-user-register-side-bar.component';
-import { User } from './models/user.model';
 import { UserHistoryService } from './services/user-history.service';
 import { AddNewUserComponent } from './admin-dashboard/components/add-new-user/add-new-user.component';
 import { ModifyUserDataComponent } from './admin-dashboard/components/modify-user-data/modify-user-data.component';
 import { ConfirmationDeleteUserComponent } from './admin-dashboard/components/confirmation-delete-user/confirmation-delete-user.component';
 import { AdminStatsComponent } from './admin-stats/admin-stats.component';
+import { NavBarNotLogedComponent } from './core/navbar/components/nav-bar-not-loged/nav-bar-not-loged.component';
+import { NavBarLogedComponent } from './core/navbar/components/nav-bar-loged/nav-bar-loged.component';
+import { BarChartsComponent } from './admin-stats/components/bar-charts/bar-charts.component';
+import { StatsService } from './services/stats.services';
 
 
 const appRoutes:Routes = [
@@ -64,7 +67,7 @@ const appRoutes:Routes = [
   {path:'fichaje', component:MainComponent, resolve: {registers: GetRegistersResolver}, canActivate: [AuthGuardLogin]},
   {path:'admin/dashboard', component:AdminComponent, canActivate: [AuthGuardAdmin], resolve: {users: GetRegistersResolver}},
   {path:'admin/user-history', component:AdminUserRegisterHistoryComponent, canActivate: [AuthGuardAdmin]},
-  {path:'admin/stats/:string', component:AdminStatsComponent, canActivate: [AuthGuardAdmin]},
+  {path:'admin/stats/:dni', component:AdminStatsComponent, canActivate: [AuthGuardAdmin]},
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },
 
@@ -103,6 +106,9 @@ const appRoutes:Routes = [
     ModifyUserDataComponent,
     ConfirmationDeleteUserComponent,
     AdminStatsComponent,
+    NavBarNotLogedComponent,
+    NavBarLogedComponent,
+    BarChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -127,6 +133,7 @@ const appRoutes:Routes = [
     ModifyRegister,
     UserInfoService,
     UserHistoryService,
+    StatsService,  
     provideAnimations(),
     AuthGuardAdmin,
     AuthGuardLogin,

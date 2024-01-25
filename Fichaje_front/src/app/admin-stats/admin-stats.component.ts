@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './admin-stats.component.css'
 })
 export class AdminStatsComponent {
-
+  isSidebarCollapsed = false;
 }

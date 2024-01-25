@@ -1,48 +1,8 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-    .navbar {
-        background-color: #00000033;
-        border-radius: 4px;
-        box-shadow: 0px 0px 15px rgba(26, 26, 37, 0.142); 
-    }
-</style>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand btn-link" href="#">Flypchajes</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-            <!-- Elementos alineados a la izquierda -->
-            <li class="nav-item">
-                <a class="btn btn-link" href="#" *ngIf="!islogin()">Servicios</a>
-            </li>            
-            <li class="nav-item">
-                <a class="btn btn-link" href="#" *ngIf="!islogin()">Acerca de</a>
-            </li>        
-            
-        </ul>
-        <ul  class="navbar-nav">
-            <li class="nav-item text-white" *ngIf="islogin()">
-                <h4 class="ml-10 font-italic">Bienvenido {{name}}, {{ current_date }}</h4>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
-            <!-- Elementos alineados a la derecha -->
-            <li class="nav-item" *ngIf="!islogin()">
-                <a class="btn btn-primary mx-2" href="/login">Iniciar Sesión</a>
-            </li>
-            <li class="nav-item text-white" *ngIf="islogin()">
-                <a class="btn btn-info mr-2" (click)="userConfig()">Configuración</a>
-            </li>
-            <li class="nav-item " *ngIf="islogin()">
-                <a class="btn btn-secondary" href="/" (click)="logout()">Cerrar Sesión</a>
-            </li>
-            <li class="nav-item" *ngIf="!islogin()">
-                <a class="btn btn-success" href="/signup">Registrarse</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<!-- Utiliza *ngIf en lugar de ng-component -->
+<div *ngIf="islogin()">
+    <app-nav-bar-loged></app-nav-bar-loged>
+</div>
+<div *ngIf="!islogin()">
+    <app-nav-bar-not-loged></app-nav-bar-not-loged>     
+</div>

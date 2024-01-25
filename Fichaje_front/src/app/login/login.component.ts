@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { LoginService } from '../services/login.services';
 import { Router } from '@angular/router';
 
@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username: any = "ivanmorenomoreno";
   password: any = "IvanMoreno1@";
-
   constructor(private loginService:LoginService, private router:Router) { 
 
   }
   ngOnInit(): void {
     if(this.loginService.isLogin()){
+      console.log("Ya estás logueado");
       this.router.navigate(['/fichaje']);
     }
   }
@@ -31,7 +31,6 @@ export class LoginComponent {
         this.loginService.cookie.set('user', this.loginService.user.getUser(), 30);
         this.loginService.cookie.set('name', response.name, 30);
         this.loginService.cookie.set('dni', response.dni, 30);
-        console.log(response.admin_access);
         if(response.admin_access == true){
           this.loginService.cookie.set('admin', "true", 30);
         }
@@ -49,6 +48,6 @@ export class LoginComponent {
 
   logout() {
     this.loginService.logout();
-    this.router.navigate(['/']);
+    this.loginService.logout();   
   }
 }
